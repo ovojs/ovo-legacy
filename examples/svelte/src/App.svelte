@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { OvO } from "ovo";
+  import OvO from "../../../src/OvO.svelte";
 </script>
 
 <div>
