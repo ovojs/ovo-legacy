@@ -8,6 +8,7 @@
 
   export let placeholder = "说点什么吧~";
   export let emoji = "";
+  export let server = "";
 
   let textarea: HTMLTextAreaElement;
   let previewing = false;
@@ -58,17 +59,16 @@
   function submit() {
     if (disabled) return;
 
-    // if (!html) html = markdown(value);
-    // if (!name) name = "匿名";
-
     html = html || markdown(value);
     name = name || "匿名";
-    
+
     console.log($reply);
     console.log(html);
     console.log(name);
     console.log(email);
     console.log(website);
+
+    alert('服务端开在开发中哦 ヾ(≧∇≦*)ゝ\n关注 https://github/mivinci/OvO 了解开发进度');
   }
 </script>
 
@@ -144,7 +144,7 @@
   }
 
   :global(.preview a) {
-    color: #08c;
+    color: var(--ovo-pm);
     text-decoration: none;
   }
 </style>

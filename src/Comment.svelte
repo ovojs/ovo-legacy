@@ -40,7 +40,7 @@
   <article id="ovo{c.id}" class:active={+hash.slice(4) == c.id}>
     <div class="info">
       <span class="ovo-b"><a href={c.website}>{c.name}</a></span>
-      <span class="ovo-s">| #{c.id}</span>
+      <span class="ovo-s"> #{c.id}</span>
       <span class="ovo-s">| {since(c.ctime)}</span>
       <span class="ovo-s ovo-ptr" on:click={() => toggle(i + 1)}
         >| {c.children.length} 条回复</span
@@ -62,11 +62,11 @@
   }
 
   a {
-    color: #444;
+    color: var(--ovo-ft);
   }
 
   :global(.details article) {
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--ovo-bg-hvr);
   }
 
   .details {
@@ -75,12 +75,12 @@
   }
 
   :global(.content a) {
-    color: #08c;
+    color: var(--ovo-pm);
     text-decoration: none;
   }
 
   article.active {
-    background: #eee;
+    background: var(--ovo-bg-hvr);
   }
 
   .open {

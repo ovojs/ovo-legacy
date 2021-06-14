@@ -1,15 +1,24 @@
+:root {
+  --ovo-ft: #444;
+  --ovo-bdr: #ddd;
+  --ovo-bg: #fff;
+  --ovo-bg-hvr: #eee;
+  --ovo-pm: #08c;
+  --ovo-tag: #f7f7f7;
+}
+
 .ovo-btn {
   padding: 5px 10px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--ovo-bdr);
   border-radius: 4px;
   font-size: 14px;
-  color: #444;
+  color: var(--ovo-ft);
   cursor: pointer;
 }
 
 .ovo-btn[data-active="true"],
 .ovo-btn:hover {
-  background: #eee;
+  background: var(--ovo-bg-hvr);
 }
 
 .ovo-btn[data-disabled="true"] {
@@ -21,11 +30,11 @@
 }
 
 div {
-  color: #444;
+  color: var(--ovo-ft);
 }
 
 textarea {
-  border-color: #ddd;
+  border-color: var(--ovo-bdr);
   border-radius: 4px;
 }
 
@@ -65,14 +74,14 @@ textarea {
 }
 
 .ovo-li:hover {
-  background: #eee;
+  background: var(--ovo-bg-hvr);
 }
 
 .ovo-bdr {
-  border: 1px solid #ddd;
+  border: 1px solid var(--ovo-bdr);
   border-radius: 4px;
 }
 
 .ovo-bg {
-  background: #fff;
+  background: var(--ovo-bg);
 }
