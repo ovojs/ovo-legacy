@@ -1,0 +1,22 @@
+.btn {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #444;
+  cursor: pointer;
+}
+
+.btn[data-active="true"],
+.btn:hover {
+  background: #eee;
+}
+
+div {
+  color: #444;
+}
+
+textarea {
+  border-color: #ddd;
+  border-radius: 4px;
+}
