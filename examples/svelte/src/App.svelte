@@ -1,5 +1,5 @@
-<script lang="ts">
-  import OvO from "../../../src/OvO.svelte";
+<script>
+  import OvO from "ovo";
 </script>
 
 <div>
@@ -45,5 +45,11 @@
 
   p {
     font-weight: 500;
+  }
+
+  :global(body) {
+    width: 100%;
+    padding: 0;
+    margin: 0;
   }
 </style>

@@ -1,17 +1,19 @@
 {
   "name": "ovo",
   "version": "0.0.1",
-  "description": "a tiny web component like and unlike waline",
-  "main": "dist/index.umd.js",
-  "module": "src/index.ts",
-  "types": "src/index.ts",
+  "description": "a super tiny web component for comments",
+  "main": "dist/ovo.es.js",
+  "module": "dist/ovo.es.js",
+  "types": "lib/index.d.ts",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:example": "cd example/svelte && pnpm run build"
+    "release": "tsc --build && pnpm run build"
   },
   "files": [
-    "dist"
+    "dist",
+    "lib"
   ],
   "repository": {
     "type": "git",
