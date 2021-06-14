@@ -25,6 +25,10 @@
     margin-bottom: 0;
   }
 
+  h2 {
+    color: #555;
+  }
+
   a {
     color: #08c;
     text-decoration: none;

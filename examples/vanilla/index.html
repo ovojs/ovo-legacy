@@ -17,8 +17,12 @@
     <div id="OvO"></div>
   </main>
   <script>
-    new OvO.Editor({
+    new ovo.Editor({
       target: document.getElementById('OvO'),
+      props: {
+        emoji: "emoji url",
+        server: "server url"
+      }
     })
   </script>
 </body>

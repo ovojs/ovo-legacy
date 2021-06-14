@@ -67,8 +67,9 @@
     console.log(name);
     console.log(email);
     console.log(website);
+    console.log(server);
 
-    alert('服务端开在开发中哦 ヾ(≧∇≦*)ゝ\n关注 https://github/mivinci/OvO 了解开发进度');
+    alert('服务端正在开发中哦 ヾ(≧∇≦*)ゝ\n关注 https://github/mivinci/OvO 了解开发进度');
   }
 </script>
 
