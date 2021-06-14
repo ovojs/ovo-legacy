@@ -1,14 +1,14 @@
 <script lang="ts">
-  import OvO from "../../../src/OvO.svelte";
+  import { OvO } from "ovo";
 </script>
 
 <div>
   <h1>OvO</h1>
   <h2>A Super Tiny Web Component for Comments</h2>
   <p>
-    Made by <a href="https://github.com/Mivinci">XJJ</a>.
-    Inspired by <a href="https://github.com/DIYgod/OwO">OωO</a>.
-    Available on <a href="https://github.com/Mivinci/OvO">GitHub</a>.
+    Made by <a href="https://github.com/Mivinci">XJJ</a>. Inspired by
+    <a href="https://github.com/DIYgod/OwO">OωO</a>. Available on
+    <a href="https://github.com/Mivinci/OvO">GitHub</a>.
   </p>
   <OvO />
 </div>
@@ -17,6 +17,15 @@
   div {
     width: 600px;
     margin: auto;
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 600px) {
+    div {
+      width: 100vw;
+      margin: 0;
+      padding: 0 10px;
+    }
   }
 
   h1 {

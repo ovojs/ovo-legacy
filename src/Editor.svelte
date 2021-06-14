@@ -69,11 +69,11 @@
     console.log(website);
     console.log(server);
 
-    alert('服务端正在开发中哦 ヾ(≧∇≦*)ゝ\n关注 https://github/mivinci/OvO 了解开发进度');
+    alert('服务端正在开发中哦 ヾ(≧∇≦*)ゝ\n关注 https://github/mivinci/editor 了解开发进度');
   }
 </script>
 
-<div class="OvO">
+<div class="editor">
   <div class="info">
     <input type="text" placeholder="昵称" bind:value={name} />
     <input type="email" placeholder="邮箱" bind:value={email} />
@@ -98,7 +98,7 @@
 </div>
 
 <style>
-  .OvO {
+  .editor {
     width: 100%;
     max-width: 800px;
     font-size: 14px;
@@ -124,8 +124,9 @@
   }
 
   .info {
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 33.3333%);
   }
 
   .action {

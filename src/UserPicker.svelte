@@ -2,12 +2,13 @@
   import { createEventDispatcher } from "svelte";
   import Drop from "./Drop.svelte";
   import { users } from "./store";
+  import type { User } from "./types";
 
-  let names: string[] = [];
+  let us: User[] = [];
 
   $: if ($users) {
-    names = [];
-    $users.forEach(user => names.push(user.name));
+    us = [];
+    $users.forEach((user) => us.push(user));
   }
 
   const dispatch = createEventDispatcher();
@@ -19,8 +20,17 @@
 
 <Drop title="@">
   <ul class="ovo-ul">
-    {#each names as n}
-      <li class="ovo-li ovo-ptr" on:click={() => select(n)}>{n}</li>
+    {#each us as n}
+      <li class="ovo-li ovo-ptr" on:click={() => select(n.name)}>{n.name} ({n.website})</li>
     {/each}
   </ul>
 </Drop>
+
+<style>
+  @media (max-width: 600px) {
+    ul {
+      max-width: calc(100vw - 10em);
+      overflow: auto;
+    }
+  }
+</style>

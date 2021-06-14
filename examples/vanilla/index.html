@@ -5,24 +5,31 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OvO Example</title>
+  <link rel="stylesheet" href="../../dist/style.css">
   <script src="../../dist/OvO.umd.js"></script>
 </head>
 <style>
+  body {
+    width: 100%;
+  }
+
   main {
     width: 600px;
+    margin: auto;
   }
 </style>
 <body>
   <main>
+    <h1>OvO</h1>
     <div id="OvO"></div>
   </main>
   <script>
-    new ovo.Editor({
+    new ovo.OvO({
       target: document.getElementById('OvO'),
-      props: {
-        emoji: "emoji url",
-        server: "server url"
-      }
+      // props: {
+      //   emoji: "emoji url",
+      //   server: "server url"
+      // }
     })
   </script>
 </body>

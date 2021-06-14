@@ -30,16 +30,21 @@
   const promise = fetchComments(comment);
 </script>
 
-<Editor {placeholder} {emoji} />
-
-{#await promise}
-  <Loading />
-{:then c}
-  <h3>评论 {count(c.comments)}</h3>
-  <Comment comments={c.comments} />
-{/await}
+<section class="OvO">
+  <Editor {placeholder} {emoji} />
+  {#await promise}
+    <Loading />
+  {:then c}
+    <h3>评论 {count(c.comments)}</h3>
+    <Comment comments={c.comments} />
+  {/await}
+</section>
 
 <style>
+  .OvO {
+    width: 100%;;
+  }
+
   h3 {
     margin-bottom: 0;
   }

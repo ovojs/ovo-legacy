@@ -1,5 +1,9 @@
 /// <reference types="svelte" />
-import Editor from "./Editor.svelte";
+import OvO from "./OvO.svelte";
 import "./global.css";
 
-export { Editor }
+export {
+  OvO,
+}
+
+export * from "./types";

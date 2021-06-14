@@ -1,11 +1,10 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-import Drop from "./Drop.svelte";
+  import Drop from "./Drop.svelte";
+  import Loading from "./Loading.svelte";
   import type { Emoji, EmojiSource } from "./types";
 
   export let emoji = "";
-
-  let open = false;
 
   const dispatch = createEventDispatcher();
 
@@ -24,7 +23,7 @@ import Drop from "./Drop.svelte";
         const e = await res.json();
         return e;
       }
-    } catch(e) {
+    } catch (e) {
       throw e;
     }
   }
@@ -35,8 +34,8 @@ import Drop from "./Drop.svelte";
 <Drop title="表情">
   <div class="emoji">
     {#await promise}
-      加载中...
-    {:then source} 
+      <Loading />
+    {:then source}
       <ul class="ovo-ul">
         {#each source.temoji as e}
           <li title={e.title} on:click={() => select(e)}>{e.text}</li>
@@ -73,5 +72,12 @@ import Drop from "./Drop.svelte";
     height: 250px;
     padding: 10px;
     overflow: auto;
+  }
+
+  @media (max-width: 600px) {
+    .emoji {
+      width: calc(100vw - 3em);
+      height: 200px;
+    }
   }
 </style>
