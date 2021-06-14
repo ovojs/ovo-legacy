@@ -1,5 +1,16 @@
 {
-  "extends": "@tsconfig/svelte/tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "moduleResolution": "node",
+    "target": "esnext",
+    "importsNotUsedAsValues": "error",
+    "isolatedModules": true,
+    "sourceMap": true,
+    "strict": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
   "include": [
     "src"
   ]
