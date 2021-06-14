@@ -10,5 +10,6 @@ Made by [XJJ](https://github.com/mivinci). Inspired by [OωO](https://github.com
 - [x] 客户端
 - [ ] 服务端（渲染公式，防XSS，存储数据）
 - [ ] 暗黑主题
+- [ ] 官网文档
 - [ ] 适配 Hexo/Hugo
-- [ ] 国际化
+- [ ] 国际化（可能会鸽）
