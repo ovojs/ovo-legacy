@@ -2,6 +2,8 @@
   import FacePicker from "./FacePicker.svelte";
   import wordcount from "./wordcount";
   import markdown from "./markdown";
+  import { reply } from "./store";
+  import UserPicker from "./UserPicker.svelte";
   import type { Emoji } from "./types";
 
   export let placeholder = "说点什么吧~";
@@ -12,40 +14,85 @@
   let value = "";
   let html = "";
 
+  let name = "",
+    email = "",
+    website = "";
+
   $: count = wordcount(value);
 
   $: if (previewing) {
     html = markdown(value);
   }
 
-  function insertEmoji(e: CustomEvent<Emoji>) {
-    const emoji = e.detail.text;
+  function insert(text: string) {
     const start = textarea.selectionStart,
       end = textarea.selectionEnd;
 
     value =
-      value.substring(0, start) + emoji + value.substring(end, value.length);
+      value.substring(0, start) + text + value.substring(end, value.length);
 
     textarea.selectionStart = start + emoji.length;
     textarea.selectionEnd = start + emoji.length;
     textarea.focus();
   }
+
+  function insertEmoji(e: CustomEvent<Emoji>) {
+    const emoji = e.detail.text;
+    insert(emoji);
+  }
+
+  function insertUser(e: CustomEvent<string>) {
+    const user = `@${e.detail} `;
+    insert(user);
+  }
+
+  $: if ($reply) {
+    placeholder = `回复#${$reply.id}`;
+    if (textarea) {
+      textarea.focus();
+    }
+  }
+
+  let disabled = false;
+
+  function submit() {
+    if (disabled) return;
+
+    // if (!html) html = markdown(value);
+    // if (!name) name = "匿名";
+
+    html = html || markdown(value);
+    name = name || "匿名";
+    
+    console.log($reply);
+    console.log(html);
+    console.log(name);
+    console.log(email);
+    console.log(website);
+  }
 </script>
 
 <div class="OvO">
   <div class="info">
-    <input type="text" placeholder="昵称" />
-    <input type="email" placeholder="邮箱" />
-    <input type="url" placeholder="网址" />
+    <input type="text" placeholder="昵称" bind:value={name} />
+    <input type="email" placeholder="邮箱" bind:value={email} />
+    <input type="url" placeholder="网址" bind:value={website} />
   </div>
   <textarea bind:this={textarea} bind:value {placeholder} />
   <div class="preview" class:open={previewing}>{@html html}</div>
   <div class="action">
     <FacePicker {emoji} on:change={insertEmoji} />
-    <div class="btn" data-active="{previewing}" on:click={() => (previewing = !previewing)}>预览</div>
+    <div
+      class="ovo-btn"
+      data-active={previewing}
+      on:click={() => (previewing = !previewing)}
+    >
+      预览
+    </div>
+    <UserPicker on:change={insertUser} />
     <div />
     <div>{count} 字</div>
-    <div class="btn">发布</div>
+    <div class="ovo-btn" data-disabled={disabled} on:click={submit}>发布</div>
   </div>
 </div>
 
@@ -82,7 +129,7 @@
 
   .action {
     display: grid;
-    grid-template-columns: auto auto 1fr auto auto;
+    grid-template-columns: repeat(3, auto) 1fr repeat(2, auto);
     align-items: center;
     gap: 10px;
     margin-top: 5px;
@@ -94,5 +141,10 @@
 
   input {
     border: 0;
+  }
+
+  :global(.preview a) {
+    color: #08c;
+    text-decoration: none;
   }
 </style>

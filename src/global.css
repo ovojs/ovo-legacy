@@ -1,4 +1,4 @@
-.btn {
+.ovo-btn {
   padding: 5px 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -7,9 +7,17 @@
   cursor: pointer;
 }
 
-.btn[data-active="true"],
-.btn:hover {
+.ovo-btn[data-active="true"],
+.ovo-btn:hover {
   background: #eee;
+}
+
+.ovo-btn[data-disabled="true"] {
+  cursor: not-allowed;
+}
+
+.ovo-btn[data-disabled="true"]:hover {
+  background: inherit;
 }
 
 div {
@@ -19,4 +27,52 @@ div {
 textarea {
   border-color: #ddd;
   border-radius: 4px;
+}
+
+.ovo-s {
+  font-size: .95em;
+}
+
+.ovo-xs {
+  font-size: .8em;
+}
+
+.ovo-b {
+  font-weight: 500;
+}
+
+.ovo-r {
+  float: right;
+}
+
+.ovo-ptr {
+  cursor: pointer;
+}
+
+.ovo-a {
+  text-decoration: underline;
+}
+
+.ovo-ul {
+  white-space: nowrap;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ovo-li {
+  padding: 5px 10px;
+}
+
+.ovo-li:hover {
+  background: #eee;
+}
+
+.ovo-bdr {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.ovo-bg {
+  background: #fff;
 }

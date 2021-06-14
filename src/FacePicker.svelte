@@ -1,5 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
+import Drop from "./Drop.svelte";
   import type { Emoji, EmojiSource } from "./types";
 
   export let emoji = "";
@@ -9,9 +10,7 @@
   const dispatch = createEventDispatcher();
 
   function select(e: Emoji) {
-    return () => {
-      dispatch("change", e);
-    };
+    dispatch("change", e);
   }
 
   async function fetchEmojis(url: string): Promise<EmojiSource> {
@@ -33,27 +32,24 @@
   const promise = fetchEmojis(emoji);
 </script>
 
-<div tabindex="0" on:blur={() => (open = false)}>
-  <div class="btn" data-active={open} on:click={() => (open = !open)}>表情</div>
-  <div class:open class="detail">
+<Drop title="表情">
+  <div class="emoji">
     {#await promise}
       加载中...
     {:then source} 
-      <ul>
+      <ul class="ovo-ul">
         {#each source.temoji as e}
-          <li title={e.title} on:click={select(e)}>{e.text}</li>
+          <li title={e.title} on:click={() => select(e)}>{e.text}</li>
         {/each}
       </ul>
     {/await}
   </div>
-</div>
+</Drop>
 
 <style>
   ul {
     display: flex;
     flex-wrap: wrap;
-    padding: 0;
-    margin: 0;
     font-size: 12px;
   }
 
@@ -72,25 +68,10 @@
       0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   }
 
-  div {
-    position: relative;
-  }
-
-  .detail {
-    display: none;
+  .emoji {
     width: 400px;
     height: 250px;
-    position: absolute;
-    top: 40px;
-    left: 0;
-    background: #fff;
     padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
     overflow: auto;
-  }
-
-  div.open {
-    display: block;
   }
 </style>
