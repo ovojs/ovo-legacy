@@ -1,4 +1,3 @@
-/// <reference types="svelte" />
 import App from "./App.svelte";
 import "./global.css";
 import "../../../src/global.css";
