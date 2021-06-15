@@ -2,9 +2,8 @@
   import Comment from "./Comment.svelte";
   import Editor from "./Editor.svelte";
   import { count } from "./dfs";
-  import { comments } from "../testdata/comment.json";
-  import type { Comments } from "./types";
   import Loading from "./Loading.svelte";
+  import type { Comments } from "./types";
 
   export let placeholder = "说点什么吧~";
   export let emoji =

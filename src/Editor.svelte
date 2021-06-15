@@ -69,7 +69,7 @@
     console.log(website);
     console.log(server);
 
-    alert('服务端正在开发中哦 ヾ(≧∇≦*)ゝ\n关注 https://github/Mivinci/OvO 了解开发进度');
+    alert('服务端正在开发中哦 ヾ(≧∇≦*)ゝ\n关注 https://github.com/Mivinci/OvO 了解开发进度');
   }
 </script>
 

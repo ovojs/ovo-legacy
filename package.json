@@ -1,7 +1,7 @@
 {
   "name": "ovo",
   "version": "0.0.1",
-  "description": "a super tiny web component for comments",
+  "description": "A super tiny web component for comments",
   "main": "dist/ovo.es.js",
   "module": "dist/ovo.es.js",
   "types": "lib/index.d.ts",
@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "release": "tsc --build && pnpm run build"
+    "release": "tsc --build && pnpm run build",
+    "site": "./scripts/site.sh"
   },
   "files": [
     "dist",
