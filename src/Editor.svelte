@@ -1,9 +1,9 @@
 <script lang="ts">
   import FacePicker from "./FacePicker.svelte";
+  import UserPicker from "./UserPicker.svelte";
   import wordcount from "./wordcount";
   import markdown from "./markdown";
   import { reply } from "./store";
-  import UserPicker from "./UserPicker.svelte";
   import type { Emoji } from "./types";
 
   export let placeholder = "说点什么吧~";
@@ -69,7 +69,9 @@
     console.log(website);
     console.log(server);
 
-    alert('服务端正在开发中哦 ヾ(≧∇≦*)ゝ\n关注 https://github.com/Mivinci/OvO 了解开发进度');
+    alert(
+      "服务端正在开发中哦 ヾ(≧∇≦*)ゝ\n关注 https://github.com/Mivinci/OvO 了解开发进度"
+    );
   }
 </script>
 

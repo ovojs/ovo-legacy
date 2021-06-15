@@ -1,6 +1,6 @@
 {
-  "name": "ovo",
-  "version": "0.0.1",
+  "name": "@ovojs/ovo",
+  "version": "0.0.1-next.1",
   "description": "A super tiny web component for comments",
   "main": "dist/ovo.es.js",
   "module": "dist/ovo.es.js",
@@ -18,7 +18,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mivinci/OvO.git"
+    "url": "git+https://github.com/ovojs/OvO.git"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.11",
