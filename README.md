@@ -75,9 +75,9 @@ XSS 过滤 (Cross-site scripting filtering) 主要为了防止用户在评论内
 
 评论本质是一种树形的数据结构，容易想到的是将评论存储在像 MangoDB 这样的文档数据库中，数据结构如下 (为方便理解，只显示了核心字段)
 
-```json
+```javascript
 {
-  "_id": ObjectId
+  "_id": ObjectId,
   "content": "评论内容",
   "children": [
     {
@@ -96,7 +96,7 @@ XSS 过滤 (Cross-site scripting filtering) 主要为了防止用户在评论内
 **评论表：**
 
 | 字段    | 含义                     |
-| ------- | ------------------------ |
+| :------ | :----------------------- |
 | id      | 评论 ID (唯一)           |
 | sid     | 评论对象的 ID，如文章 ID |
 | content | 评论内容                 |
