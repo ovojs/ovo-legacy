@@ -1,5 +1,6 @@
 import App from "./App.svelte";
-import "ovo/dist/style.css";
+import "../../../dist/style.css";
+import "./global.css";
 
 const app = new App({
   target: document.getElementById("app")

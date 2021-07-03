@@ -4,3 +4,4 @@ lib
 .DS_Store
 pnpm-lock.yaml
 tsconfig.tsbuildinfo
+*.log

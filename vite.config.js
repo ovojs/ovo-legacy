@@ -9,8 +9,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: "src/index.ts",
-      name: "ovo",
-    },
-    minify: true
+      name: "OvO",
+    }
   }
 })

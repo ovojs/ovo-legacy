@@ -10,6 +10,6 @@
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.11",
     "svelte": "^3.38.2",
     "vite": "^2.3.7",
-    "ovo": "workspace:*"
+    "@ovojs/ovo": "workspace:*"
   }
 }

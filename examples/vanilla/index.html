@@ -5,8 +5,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OvO Example</title>
-  <link rel="stylesheet" href="../../dist/style.css">
-  <script src="../../dist/OvO.umd.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/@ovojs/ovo/dist/style.css">
+  <script src="https://unpkg.com/@ovojs/ovo"></script>
 </head>
 <style>
   body {
@@ -21,15 +21,15 @@
 <body>
   <main>
     <h1>OvO</h1>
-    <div id="OvO"></div>
+    <div id="ovo"></div>
   </main>
   <script>
-    new ovo.OvO({
-      target: document.getElementById('OvO'),
-      // props: {
-      //   emoji: "emoji url",
-      //   server: "server url"
-      // }
+    new OvO({
+      target: document.getElementById('ovo'),
+      props: {
+        emoji: "https://cdn.jsdelivr.net/gh/DejavuMoe/DejavuMoe/emoji.json",
+        server: "https://www.fastmock.site/mock/112f2e694fa5334c4d698ce22a512405/ovo"
+      }
     })
   </script>
 </body>

@@ -4,13 +4,14 @@
   import { count } from "./dfs";
   import Loading from "./Loading.svelte";
   import type { Comments } from "./types";
+  import { onDestroy } from "svelte";
 
   export let placeholder = "说点什么吧~";
   export let emoji =
-    "https://cdn.jsdelivr.net/gh/Spoience/DejavuMoe/emoji.json";
+    "https://cdn.jsdelivr.net/gh/DejavuMoe/DejavuMoe/emoji.json";
 
-  export let comment =
-    "https://www.fastmock.site/mock/112f2e694fa5334c4d698ce22a512405/ovo/comment";
+  export let server =
+    "https://www.fastmock.site/mock/112f2e694fa5334c4d698ce22a512405/ovo";
 
   async function fetchComments(url: string): Promise<Comments> {
     const res = await fetch(url);
@@ -26,7 +27,11 @@
     }
   }
 
-  const promise = fetchComments(comment);
+  const promise = fetchComments(`${server}/comment`);
+
+  onDestroy(function () {
+    console.log("destroy");
+  });
 </script>
 
 <section class="OvO">
@@ -41,7 +46,7 @@
 
 <style>
   .OvO {
-    width: 100%;;
+    width: 100%;
   }
 
   h3 {

@@ -1,16 +1,18 @@
 {
   "name": "@ovojs/ovo",
-  "version": "0.0.1-next.1",
+  "version": "0.0.1-next.3",
   "description": "A super tiny web component for comments",
-  "main": "dist/ovo.es.js",
+  "main": "dist/ovo.umd.js",
   "module": "dist/ovo.es.js",
   "types": "lib/index.d.ts",
+  "unpkg": "dist/ovo.umd.js",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "release": "tsc --build && pnpm run build",
-    "site": "./scripts/site.sh"
+    "site": "./scripts/site.sh",
+    "pub": "npm publish --access public"
   },
   "files": [
     "dist",
@@ -24,12 +26,12 @@
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.11",
     "@tsconfig/svelte": "^2.0.1",
     "@types/marked": "^2.0.3",
-    "svelte": "^3.38.2",
+    "svelte": "^3.38.3",
     "svelte-preprocess": "^4.7.3",
-    "typescript": "^4.3.2",
-    "vite": "^2.3.7"
+    "typescript": "^4.3.5",
+    "vite": "^2.3.8"
   },
   "dependencies": {
-    "marked": "^2.0.7"
+    "marked": "^2.1.3"
   }
 }
