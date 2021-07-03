@@ -1,3 +1,5 @@
+type Nullable<T> = T | null;
+
 export type Emoji = {
   title: string,
   text: string
@@ -7,7 +9,7 @@ export type EmojiSource = {
   temoji: Emoji[]
 }
 
-export interface Comment extends User {
+export type Comment = {
   id: number,
   pid: number,
   sid: number,
@@ -15,6 +17,7 @@ export interface Comment extends User {
   browser: string,
   ctime: string,
   os: string,
+  user: Nullable<User>,
   children: Comment[],
   open?: boolean
 }
@@ -25,6 +28,6 @@ export type Comments = {
 
 export type User = {
   name: string,
-  website: string
-  email?: string,
+  website: string,
+  email?: string
 }

@@ -28,9 +28,9 @@
   onMount(function () {
     const us = new Map<string, User>();
     dfs(comments, (c: Comment) => {
-      us.set(c.name, {
-        name: c.name,
-        website: c.website
+      us.set(c.user?.name, {
+        name: c.user.name,
+        website: c.user.website
       });
     });
     users.set(us);
@@ -40,7 +40,7 @@
 {#each comments as c, i}
   <article id="ovo{c.id}" class:active={hash && +hash.slice(4) === c.id}>
     <div class="info">
-      <span class="ovo-b"><a href={c.website}>{c.name}</a></span>
+      <span class="ovo-b"><a href={c.user?.website}>{c.user?.name}</a></span>
       <span class="ovo-s"> #{c.id}</span>
       <span class="ovo-s">| {since(c.ctime)}</span>
       <span class="ovo-s ovo-ptr" on:click={() => toggle(i + 1)}
