@@ -20,14 +20,14 @@
       if (!res.ok) {
         throw new Error("error fetching comments");
       }
-      const c = await res.json();
+      const c: Comments = await res.json();
       return c;
     } catch (e) {
       throw e;
     }
   }
 
-  const promise = fetchComments(`${server}/comment`);
+  const p = fetchComments(`${server}/comment`);
 
   onDestroy(function () {
     console.log("destroy");
@@ -36,7 +36,7 @@
 
 <section class="OvO">
   <Editor {placeholder} {emoji} />
-  {#await promise}
+  {#await p}
     <Loading />
   {:then c}
     <h3>评论 {count(c.comments)}</h3>

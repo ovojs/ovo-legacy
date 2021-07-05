@@ -5,13 +5,19 @@
   --ovo-bg-hvr: #eee;
   --ovo-pm: #08c;
   --ovo-tag: #f7f7f7;
+  --ovo-trans-sec: .5s;
+}
+
+* {
+  transition: background-color var(--ovo-trans-sec);
 }
 
 .ovo-btn {
-  padding: 5px 10px;
+  padding: 7px 10px;
   border: 1px solid var(--ovo-bdr);
   border-radius: 4px;
   font-size: 14px;
+  line-height: 1;
   color: var(--ovo-ft);
   cursor: pointer;
 }
@@ -36,6 +42,11 @@ div {
 textarea {
   border-color: var(--ovo-bdr);
   border-radius: 4px;
+}
+
+input,textarea {
+  color: var(--ovo-ft);
+  background-color: var(--ovo-bg);
 }
 
 .ovo-s {

@@ -1,5 +1,26 @@
+:root {
+  --bg: #fff;
+  --ft: #555;
+}
+
 body {
   width: 100%;
   padding: 0;
   margin: 0;
+  background-color: var(--bg);
+  transition: all .5s;
+
+  font-family: Helvetica, sans-serif;
+}
+
+html.dark {
+  --bg: #262d33;
+  --ft: #eee;
+  --bdr: #555;
+  --tag: #30363d;
+  --ovo-bg: var(--bg);
+  --ovo-ft: var(--ft);
+  --ovo-bdr: var(--bdr);
+  --ovo-bg-hvr: var(--bdr);
+  --ovo-tag: var(--tag);
 }

@@ -18,7 +18,7 @@
   .details {
     display: none;
     position: absolute;
-    top: 40px;
+    top: 39px;
   }
 
   div.open {
