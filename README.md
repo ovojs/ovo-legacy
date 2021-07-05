@@ -55,6 +55,22 @@ npm i @ovojs/ovo
 
 OvO 本身使用 [Svelte](https://svelte.dev) 开发，但可以利用该方法移植到为 React 或 Vue 的组件 (下个版本发布)。
 
+### 自定义主题色
+
+OvO 直接使用 [CSS 变量](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) 来控制主题色，默认为亮色，在您的项目中，可以通过下面几个 CSS 变量来覆盖 OvO 的默认颜色配置。
+
+```scss
+--ovo-ft: #444;        // 文字颜色
+--ovo-bdr: #ddd;       // 边框颜色
+--ovo-bg: #fff;        // 背景颜色
+--ovo-bg-hvr: #eee;    // hover 时的背景色
+--ovo-pm: #08c;        // a 标签的文字颜色 
+--ovo-tag: #f7f7f7;    // span 的文字颜色
+--ovo-trans-sec: .5s;  // 颜色过度时间
+```
+
+[一个暗黑主题色的示例](https://github.com/ovojs/OvO/blob/main/examples/svelte/src/global.css#L16)
+
 ## 反馈
 
 若您对 OvO 有什么改进建议或使用中遇到问题，欢迎在 [Issues](https://github.com/ovojs/OvO/issues) 处发言，或者直接加入 QQ 群 248037506 与大佬们进行互动 🤺。
