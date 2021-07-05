@@ -114,7 +114,6 @@ XSS 过滤 (Cross-site scripting filtering) 主要为了防止用户在评论内
 | 字段    | 含义                     |
 | :------ | :----------------------- |
 | id      | 评论 ID (唯一)           |
-| sid     | 评论对象的 ID，如文章 ID |
 | content | 评论内容                 |
 
 **回复表：**
@@ -122,7 +121,6 @@ XSS 过滤 (Cross-site scripting filtering) 主要为了防止用户在评论内
 | 字段    | 含义                        |
 | :------ | :-------------------------- |
 | id      | 回复 ID (唯一)              |
-| sid     | 同评论表的 sid              |
 | cid     | 回复对象的 ID (评论表的 ID) |
 | rid     | 回复对象的 ID (回复表的 ID) |
 | content | 回复内容                    |
