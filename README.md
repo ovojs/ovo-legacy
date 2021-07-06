@@ -151,12 +151,8 @@ OvO 通过 `@username` 来表示需要被通知的用户，服务端在收到一
 
 - 请求示例：
 
-```json
-{
-  "domain": "xjj.pub",
-  "path": "/post/1",
-  "page": 0
-}
+```
+GET https://yourserver.com/comment?domain=xjj.pub&path=/post/1&page=0
 ```
 
 - 响应示例：
