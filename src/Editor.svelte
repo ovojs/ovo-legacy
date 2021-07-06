@@ -4,7 +4,9 @@
   import wordcount from "./wordcount";
   import markdown from "./markdown";
   import { reply } from "./store";
-  import type { Emoji } from "./types";
+  import type { Emoji, ReplyPostParams, ReplyTo } from "./types";
+  import HTTP from "./http";
+import { prevent_default } from "svelte/internal";
 
   export let placeholder = "说点什么吧~";
   export let emoji = "";
@@ -15,7 +17,7 @@
   let value = "";
   let html = "";
 
-  let name = "",
+  export let name = "",
     email = "",
     website = "";
 
@@ -56,32 +58,74 @@
 
   let disabled = false;
 
-  function submit() {
+  async function submit() {
     if (disabled) return;
+
+    disabled = true;
 
     html = html || markdown(value);
     name = name || "匿名";
 
-    console.log($reply);
-    console.log(html);
-    console.log(name);
-    console.log(email);
-    console.log(website);
-    console.log(server);
+    console.log("reply:", $reply);
+    console.log("content:", html);
+    console.log("name:", name);
+    console.log("email:", email);
+    console.log("website:", website);
+    console.log("server", server);
 
-    alert(
-      "服务端正在开发中哦 ヾ(≧∇≦*)ゝ\n关注 https://github.com/Mivinci/OvO 了解开发进度"
-    );
+    let replyTo: ReplyTo;
+
+    if ($reply) {
+      const { cid, id } = $reply;
+      replyTo = {
+        cid,
+        // *** This is important ***
+        // A null cid indicates the user is replying to a comment,
+        // otherwise to a reply that has id.
+        rid: cid ? id : null, 
+      };
+    }
+
+    const user = { name, email, website };
+
+    const params: ReplyPostParams = {
+      domain: location.hostname,
+      path: location.pathname,
+      content: html,
+      user,
+      ...replyTo,
+    };
+
+    localStorage.user = JSON.stringify(user);
+
+    try {
+      if ($reply) {
+        await HTTP.postReply(params);
+        return;
+      }
+
+      await HTTP.postComment(params);
+    } catch (e) {
+      alert(`OvO ${e.message}`);
+    }
+
+    disabled = false;
+
+    alert("OvO 发布成功!");
+
+    // alert(
+    //   "服务端正在开发中哦 ヾ(≧∇≦*)ゝ\n关注 https://github.com/ovojs/ovo 了解开发进度"
+    // );
   }
 </script>
 
-<div class="editor">
+<form on:submit|preventDefault={submit}>
   <div class="info">
-    <input type="text" placeholder="昵称" bind:value={name} />
-    <input type="email" placeholder="邮箱" bind:value={email} />
-    <input type="url" placeholder="网址" bind:value={website} />
+    <input type="text" placeholder="昵称" bind:value={name} required />
+    <input type="email" placeholder="邮箱" bind:value={email} required />
+    <input type="url" placeholder="网址" bind:value={website} required />
   </div>
-  <textarea bind:this={textarea} bind:value {placeholder} />
+  <textarea bind:this={textarea} bind:value {placeholder} required />
   <div class="preview" class:open={previewing}>{@html html}</div>
   <div class="action">
     <FacePicker {emoji} on:change={insertEmoji} />
@@ -95,12 +139,12 @@
     <UserPicker on:change={insertUser} />
     <div />
     <div>{count} 字</div>
-    <div class="ovo-btn" data-disabled={disabled} on:click={submit}>发布</div>
+    <button class="ovo-btn" type="submit" data-disabled={disabled}>发布</button>
   </div>
-</div>
+</form>
 
 <style>
-  .editor {
+  form {
     width: 100%;
     max-width: 800px;
     font-size: 14px;

@@ -3,8 +3,9 @@
   import Editor from "./Editor.svelte";
   import { count } from "./dfs";
   import Loading from "./Loading.svelte";
-  import type { Comments } from "./types";
-  import { onDestroy } from "svelte";
+  import type { Comments, User } from "./types";
+  import { onDestroy, onMount } from "svelte";
+  import HTTP from "./http";
 
   export let placeholder = "说点什么吧~";
   export let emoji =
@@ -13,29 +14,45 @@
   export let server =
     "https://www.fastmock.site/mock/112f2e694fa5334c4d698ce22a512405/ovo";
 
-  async function fetchComments(url: string): Promise<Comments> {
-    const res = await fetch(url);
+  export let timeout = 10000;
 
-    try {
-      if (!res.ok) {
-        throw new Error("error fetching comments");
-      }
-      const c: Comments = await res.json();
-      return c;
-    } catch (e) {
-      throw e;
-    }
+  HTTP.init({ server, timeout });
+
+  let p: Promise<Comments>;
+  let page = 0;
+
+  let user: User;
+
+  try {
+    p = HTTP.getComments({
+      domain: location.hostname,
+      path: location.pathname,
+      page,
+    });
+  } catch (e) {
+    console.log(e);
   }
 
-  const p = fetchComments(`${server}/comment`);
+  onMount(function () {
+    const cache = localStorage.user;
+    if (cache) {
+      user = JSON.parse(cache);
+    }
+  });
 
   onDestroy(function () {
-    console.log("destroy");
+    console.log("OvO was destroyed");
   });
 </script>
 
 <section class="OvO">
-  <Editor {placeholder} {emoji} />
+  <Editor
+    {placeholder}
+    {emoji}
+    name={user?.name}
+    email={user?.email}
+    website={user?.website}
+  />
   {#await p}
     <Loading />
   {:then c}
