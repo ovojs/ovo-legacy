@@ -6,11 +6,9 @@
   import { reply } from "./store";
   import type { Emoji, ReplyPostParams, ReplyTo } from "./types";
   import HTTP from "./http";
-import { prevent_default } from "svelte/internal";
 
   export let placeholder = "说点什么吧~";
   export let emoji = "";
-  export let server = "";
 
   let textarea: HTMLTextAreaElement;
   let previewing = false;
@@ -66,12 +64,12 @@ import { prevent_default } from "svelte/internal";
     html = html || markdown(value);
     name = name || "匿名";
 
-    console.log("reply:", $reply);
-    console.log("content:", html);
-    console.log("name:", name);
-    console.log("email:", email);
-    console.log("website:", website);
-    console.log("server", server);
+    // console.log("reply:", $reply);
+    // console.log("content:", html);
+    // console.log("name:", name);
+    // console.log("email:", email);
+    // console.log("website:", website);
+    // console.log("server", server);
 
     let replyTo: ReplyTo;
 
@@ -82,7 +80,7 @@ import { prevent_default } from "svelte/internal";
         // *** This is important ***
         // A null cid indicates the user is replying to a comment,
         // otherwise to a reply that has id.
-        rid: cid ? id : null, 
+        rid: cid ? id : null,
       };
     }
 
@@ -106,7 +104,8 @@ import { prevent_default } from "svelte/internal";
 
       await HTTP.postComment(params);
     } catch (e) {
-      alert(`OvO ${e.message}`);
+      alert(e.message);
+      return;
     }
 
     disabled = false;

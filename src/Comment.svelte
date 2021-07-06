@@ -10,8 +10,8 @@
   let hash = location.hash;
 
   function hashchange() {
-    const h = location.hash;    
-    hash = /#ovo\d+/.test(h) ? h : '';
+    const h = location.hash;
+    hash = /#ovo\d+/.test(h) ? h : "";
   }
 
   function replyTo(c: Comment) {
@@ -30,7 +30,7 @@
     dfs(comments, (c: Comment) => {
       us.set(c.user?.name, {
         name: c.user.name,
-        website: c.user.website
+        website: c.user.website,
       });
     });
     users.set(us);
@@ -42,9 +42,9 @@
     <div class="info">
       <span class="ovo-b"><a href={c.user?.website}>{c.user?.name}</a></span>
       <span class="ovo-s"> #{c.id}</span>
-      <span class="ovo-s">| {since(c.ctime)}</span>
-      <span class="ovo-s ovo-ptr" on:click={() => toggle(i + 1)}
-        >| {c.children.length} 条回复</span
+      <span class="ovo-s"> {since(c.ctime)}</span>
+      <span class="ovo-s ovo-a ovo-ptr" on:click={() => toggle(i + 1)}>
+        {c.children.length} 条回复</span
       >
       <span class="ovo-s ovo-r ovo-ptr" on:click={() => replyTo(c)}>回复</span>
     </div>

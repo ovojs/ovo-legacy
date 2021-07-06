@@ -2,6 +2,8 @@
 
 OvO 是一款小巧的 web 端评论插件。感谢 [OωO](https://github.com/DIYgod/OwO) 的启发。
 
+[![wakatime](https://wakatime.com/badge/github/ovojs/OvO.svg)](https://wakatime.com/badge/github/ovojs/OvO)
+
 ## 使用
 
 ### 在浏览器中使用
