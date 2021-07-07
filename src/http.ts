@@ -49,7 +49,7 @@ export default class HTTP {
     ps.set("domain", params.domain);
     ps.set("path", params.path);
     ps.set("page", params.page.toString());
-    const res = await fetchTimeout(`${this.server}/comment?${encodeURIComponent(ps.toString())}`, { timeout: this.timeout });
+    const res = await fetchTimeout(`${this.server}/comment?${encodeURI(ps.toString())}`, { timeout: this.timeout });
     try {
       if (!res.ok) {
         throw new Error("error getting comments " + params);
