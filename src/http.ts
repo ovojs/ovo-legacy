@@ -15,7 +15,8 @@ export default class HTTP {
   }
 
   static async postComment(params: CommentPostParams): Promise<void> {
-    const res = await fetchTimeout(`${this.server}/comment`, { method: "POST", timeout: this.timeout });
+    const body = new Blob([JSON.stringify(params)], {type: 'application/json'});
+    const res = await fetchTimeout(`${this.server}/comment`, { method: "POST", timeout: this.timeout, body });
     try {
       if (!res.ok) {
         throw new Error("error posting comment " + params);
@@ -30,7 +31,8 @@ export default class HTTP {
   }
 
   static async postReply(params: ReplyPostParams): Promise<void> {
-    const res = await fetchTimeout(`${this.server}/reply`, { method: "POST", timeout: this.timeout });
+    const body = new Blob([JSON.stringify(params)], {type: 'application/json'});
+    const res = await fetchTimeout(`${this.server}/reply`, { method: "POST", timeout: this.timeout, body });
     try {
       if (!res.ok) {
         throw new Error("error posting comment " + params);
@@ -46,10 +48,10 @@ export default class HTTP {
 
   static async getComments(params: CommentGetParams): Promise<Comments> {
     const ps = new URLSearchParams();
-    ps.set("domain", params.domain);
-    ps.set("path", params.path);
-    ps.set("page", params.page.toString());
-    const res = await fetchTimeout(`${this.server}/comment?${encodeURI(ps.toString())}`, { timeout: this.timeout });
+    ps.set("domain", encodeURIComponent(params.domain));
+    ps.set("path", encodeURIComponent(params.path));
+    ps.set("page", encodeURIComponent(params.page));
+    const res = await fetchTimeout(`${this.server}/comment?${ps.toString()}`, { timeout: this.timeout });
     try {
       if (!res.ok) {
         throw new Error("error getting comments " + params);

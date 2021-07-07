@@ -18,10 +18,10 @@ marked.use({
         return `<a href="${user?.website || ''}">${tex}</a> `
       });
 
-      // html = html.replace(/#\d+ /g, tex => {
-      //   matched = true;
-      //   return `<a href="#ovo${tex.slice(1).trim()}>${tex}</a>`;
-      // })
+      html = html.replace(/#\d+ /g, tex => {
+        matched = true;
+        return `<a href="#ovo${tex.slice(1).trim()}>${tex}</a>`;
+      })
 
       if (matched)
         return "<p>" + html + "</p>";
