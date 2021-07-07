@@ -62,8 +62,8 @@
     disabled = true;
 
     html = html || markdown(value);
-    name = name || "匿名";
 
+    // In case that I forget what variables can be used in this scope.
     // console.log("reply:", $reply);
     // console.log("content:", html);
     // console.log("name:", name);
@@ -76,10 +76,13 @@
     if ($reply) {
       const { cid, id } = $reply;
       replyTo = {
-        cid,
         // *** This is important ***
         // A null cid indicates the user is replying to a comment,
-        // otherwise to a reply that has id.
+        // otherwise to a reply that has `id`.
+        // If the user is replying to a comment that is cid being null,
+        // replyTo.cid should be assigned the value of the id of the 
+        // comment, otherwise the cid the reply belongs to.
+        cid: cid || id,
         rid: cid ? id : null,
       };
     }
@@ -106,9 +109,9 @@
     } catch (e) {
       alert(e.message);
       return;
+    } finally {
+      disabled = false;
     }
-
-    disabled = false;
 
     alert("OvO 发布成功!");
 

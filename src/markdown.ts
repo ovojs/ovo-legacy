@@ -12,16 +12,20 @@ marked.use({
   renderer: {
     paragraph: (text: string) => {
       let matched = false;
-      let html = text.replace(/@([\u4e00-\u9fa5]|\w)+ /g, tex => {
+      let html = text;
+
+      html = html.replace(/@([\u4e00-\u9fa5]|\w)+ /g, tex => {
         matched = true;
         const user = map.get(tex.slice(1).trim());
         return `<a href="${user?.website || ''}">${tex}</a> `
       });
 
+      console.log(html)
+
       html = html.replace(/#\d+ /g, tex => {
         matched = true;
-        return `<a href="#ovo${tex.slice(1).trim()}>${tex}</a>`;
-      })
+        return `<a href="#ovo${tex.slice(1).trim()}">${tex}</a>`;
+      });
 
       if (matched)
         return "<p>" + html + "</p>";
