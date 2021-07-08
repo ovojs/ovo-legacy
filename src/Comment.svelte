@@ -44,7 +44,7 @@
       <span class="ovo-s"> #{c.id}</span>
       <span class="ovo-s"> {since(c.ctime)}</span>
       <span class="ovo-s ovo-a ovo-ptr" on:click={() => toggle(i + 1)}>
-        {c.children.length} 条回复</span
+        {c.children?.length || 0} 条回复</span
       >
       <span class="ovo-s ovo-r ovo-ptr" on:click={() => replyTo(c)}>回复</span>
     </div>
