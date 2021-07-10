@@ -86,7 +86,7 @@ npm i @ovojs/ovo
 npm i @ovojs/react
 ```
 
-```react
+```js
 import OvO from "@ovojs/react";
 import "@ovojs/react/dist/style.css";
 
