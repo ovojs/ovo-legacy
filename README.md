@@ -31,7 +31,7 @@ new OvO({
 })
 ```
 
-其中，`emoji` 和 `server` 分别是表情资源路径和服务端接口，OvO 本身不提供服务端程序，需要由用户自己编写，或使用大佬们开发的 OvO 服务端 (目前还没有😁)，具体服务端开发规范见[服务端](https://github.com/ovojs/OvO#服务端)。
+其中，`emoji` 和 `server` 分别是表情资源路径和服务端接口，OvO 本身不提供服务端程序，需要由用户自己编写，或使用大佬们开发的 OvO [第三方服务端](https://github.com/ovojs/OvO#第三方服务端)，具体服务端开发规范见[服务端](https://github.com/ovojs/OvO#服务端)。
 
 另外，OvO 提供一个默认的表情资源和一个用于测试的服务端接口地址，如下：
 
@@ -325,6 +325,12 @@ GET https://yourserver.com/comment?domain=xjj.pub&path=/post/1&page=0
   "errmsg": "用户名已存在"
 }
 ```
+
+## 第三方服务端
+
+| Name                                                         | Language | Period   |
+| :----------------------------------------------------------- | :------- | :------- |
+| [ovo-everyday](https://github.com/HoshinoSuzumi/OvO-everyday) | Python3  | 测试阶段 |
 
 ## Q&A
 
