@@ -22,7 +22,7 @@ marked.use({
 
       console.log(html)
 
-      html = html.replace(/#\d+ /g, tex => {
+      html = html.replace(/#(\d|[a-z]{7})+ /g, tex => {
         matched = true;
         return `<a href="#ovo${tex.slice(1).trim()}">${tex}</a>`;
       });
