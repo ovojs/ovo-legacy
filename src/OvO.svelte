@@ -61,9 +61,7 @@
   <Editor
     {placeholder}
     {emoji}
-    name={user?.name}
-    email={user?.email}
-    website={user?.website}
+    {...user}
   />
 
   {#if comments.length}

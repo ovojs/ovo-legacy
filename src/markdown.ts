@@ -20,9 +20,9 @@ marked.use({
         return `<a href="${user?.website || ''}">${tex}</a> `
       });
 
-      html = html.replace(/#(\d|[a-z]{7})+ /g, tex => {
+      html = html.replace(/#(\d+|[a-z,0-9]{7}) /g, tex => {
         matched = true;
-        return `<a href="#ovo${tex.slice(1).trim()}">${tex}</a>`;
+        return `<a href="#ovo-${tex.slice(1).trim()}">${tex}</a>`;
       });
 
       if (matched)

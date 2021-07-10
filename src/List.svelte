@@ -11,7 +11,7 @@
 
   function hashchange() {
     const h = location.hash;
-    hash = /#ovo\d+/.test(h) ? h : "";
+    hash = /#ovo-(\d+|[a-z,0-9]{7})/.test(h) ? h : "";
   }
 
   function replyTo(c: Comment) {
@@ -38,7 +38,7 @@
 </script>
 
 {#each comments as c, i}
-  <article id="ovo{c.id}" class:active={hash && +hash.slice(4) === c.id}>
+  <article id="ovo-{c.id}" class:active={hash && hash.slice(5) === c.id}>
     <div class="info">
       <span class="ovo-b"><a href={c.user?.website}>{c.user?.name}</a></span>
       <span class="ovo-s"> #{c.id}</span>
