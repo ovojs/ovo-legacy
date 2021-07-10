@@ -296,6 +296,12 @@ GET https://yourserver.com/comment?domain=xjj.pub&path=/post/1&page=0
 }
 ```
 
+## Q&A
+
+1. 怎么删除评论？
+
+不能删除，除非自己在服务端的数据库中删除。说出去的话就像泼出去的水，在这个熵增的宇宙中是收不回的 /doge。
+
 ## 最后
 
 Have fun with OvO！
