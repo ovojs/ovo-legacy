@@ -2,7 +2,7 @@
 
 OvO 是一款小巧的 web 端评论插件。感谢 [OωO](https://github.com/DIYgod/OwO) 的启发。
 
-[![age](https://wakatime.com/badge/github/ovojs/OvO.svg)](https://wakatime.com/badge/github/ovojs/OvO)
+[![age](https://wakatime.com/badge/github/ovojs/OvO.svg)](https://wakatime.com/badge/github/ovojs/OvO) [![NPM](https://img.shields.io/npm/v/@ovojs/ovo)](https://npmjs.com/package/@ovojs/ovo) [![gzip size](https://img.badgesize.io/https:/unpkg.com/@ovojs/ovo?compression=gzip)](https:/unpkg.com/@ovojs/ovo)
 
 ## 使用
 
@@ -24,7 +24,9 @@ new OvO({
   target: document.getElementById('ovo'),
   props: {
     emoji: "emoji url",
-    server: "server url"
+    server: "server url",
+    placeholder: "说点什么吧～",
+    timeout: 10000
   }
 })
 ```
@@ -47,15 +49,61 @@ https://www.fastmock.site/mock/112f2e694fa5334c4d698ce22a512405/ovo
 
 具体示例程序见 [examples/vanilla](https://github.com/ovojs/OvO/blob/main/examples/vanilla/index.html)
 
+最后，`placeholder` 和 `timeout` 分别表示输入框中默认显示的文字和请求超时时间，若在 timeout 秒内，服务端没有响应，则 OvO 会中断请求。
+
 ### 作为 ESM 使用
 
-OvO 支持 ES Modules 导入方式，通过 npm 下载 (或其他类 npm 工具，如 yarn, pnpm)
+OvO 使用 [Svelte](https://svelte.dev) 开发，且支持 ES Module 导入方式，同时可在 React 和 Vue 中使用，如下表所示
+
+| Package                          | Version                                                      | Gzip Size                                                    |
+| :------------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
+| [@ovojs/ovo](./)                 | [![NPM](https://img.shields.io/npm/v/@ovojs/ovo)](https://npmjs.com/package/@ovojs/ovo) | [![gzip size](https://img.badgesize.io/https:/unpkg.com/@ovojs/ovo?compression=gzip)](https:/unpkg.com/@ovojs/ovo) |
+| [@ovojs/react](./packages/react) | [![NPM](https://img.shields.io/npm/v/@ovojs/react)](https://npmjs.com/package/@ovojs/react) | [![gzip size](https://img.badgesize.io/https:/unpkg.com/@ovojs/react?compression=gzip)](https:/unpkg.com/@ovojs/react) |
+| [@ovojs/vue](./packages/vue)     | -                                                            | -                                                            |
+
+#### Svelte
 
 ```bash
 npm i @ovojs/ovo
 ```
 
-OvO 本身使用 [Svelte](https://svelte.dev) 开发，但可以利用该方法移植到为 React 或 Vue 的组件 (下个版本发布)。
+```svelte
+<script>
+  import OvO from "@ovojs/ovo";
+  import "@ovojs/ovo/dist/style.css";
+  
+  let server = "yourserver";
+  let placeholder = "说点什么吧~";
+  let timeout = 10000;
+</script>
+
+<OvO {server} {placeholder} {timeout} />
+```
+
+#### React
+
+```bash
+npm i @ovojs/react
+```
+
+```react
+import OvO from "@ovojs/react";
+import "@ovojs/react/dist/style.css";
+
+function App() {
+  return (
+    <OvO
+      server="",
+      placeholder="",
+      timeout=10000
+    />
+  )
+}
+```
+
+#### Vue
+
+努力开发中
 
 ### 自定义主题色
 

@@ -1,5 +1,12 @@
 type Nullable<T> = T | null;
 
+export type Props = {
+  server?: string,
+  emoji?: string,
+  placeholder?: string,
+  timeout?: number
+}
+
 export type Emoji = {
   title: string,
   text: string
