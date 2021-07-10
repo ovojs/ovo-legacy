@@ -1,0 +1,25 @@
+{
+  "name": "@ovojs/vue",
+  "version": "0.0.1-next.1",
+  "main": "dist/ovo.umd.js",
+  "module": "dist/ovo.es.js",
+  "types": "lib/index.d.ts",
+  "unpkg": "dist/ovo.umd.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "release": "tsc --build && vite build",
+    "pub": "npm publish --access public"
+  },
+  "dependencies": {
+    "@ovojs/ovo": "workspace:*",
+    "vue": "^3.0.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.2.4",
+    "@vue/compiler-sfc": "^3.0.5",
+    "typescript": "^4.3.5",
+    "vite": "^2.4.1",
+    "vue-tsc": "^0.0.24"
+  }
+}

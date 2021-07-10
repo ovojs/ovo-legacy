@@ -1,16 +1,16 @@
 {
-  "include": [
-    "src"
-  ],
   "compilerOptions": {
+    "outDir": "lib",
     "target": "ESNext",
     "module": "ESNext",
-    "outDir": "lib",
-    "jsx": "react",
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "strict": true,
     "composite": true,
     "declaration": true,
     "emitDeclarationOnly": true,
-    "allowSyntheticDefaultImports": true,
-    "moduleResolution": "node"
-  }
+  },
+  "include": [
+    "src"
+  ]
 }

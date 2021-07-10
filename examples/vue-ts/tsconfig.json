@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "outDir": "lib",
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
+    "composite": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["src"]
+}

@@ -59,7 +59,7 @@ OvO 使用 [Svelte](https://svelte.dev) 开发，且支持 ES Module 导入方�
 | :------------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
 | [@ovojs/ovo](./)                 | [![NPM](https://img.shields.io/npm/v/@ovojs/ovo)](https://npmjs.com/package/@ovojs/ovo) | [![gzip size](https://img.badgesize.io/https:/unpkg.com/@ovojs/ovo?compression=gzip)](https:/unpkg.com/@ovojs/ovo) |
 | [@ovojs/react](./packages/react) | [![NPM](https://img.shields.io/npm/v/@ovojs/react)](https://npmjs.com/package/@ovojs/react) | [![gzip size](https://img.badgesize.io/https:/unpkg.com/@ovojs/react?compression=gzip)](https:/unpkg.com/@ovojs/react) |
-| [@ovojs/vue](./packages/vue)     | -                                                            | -                                                            |
+| [@ovojs/vue](./packages/vue)     | [![NPM](https://img.shields.io/npm/v/@ovojs/vue)](https://npmjs.com/package/@ovojs/vue) | ![gzip size](https://img.badgesize.io/https:/unpkg.com/@ovojs/vue?compression=gzip) |
 
 #### Svelte
 
@@ -72,7 +72,7 @@ npm i @ovojs/ovo
   import OvO from "@ovojs/ovo";
   import "@ovojs/ovo/dist/style.css";
   
-  let server = "yourserver";
+  let server = "your server address";
   let placeholder = "说点什么吧~";
   let timeout = 10000;
 </script>
@@ -93,8 +93,8 @@ import "@ovojs/react/dist/style.css";
 function App() {
   return (
     <OvO
-      server="",
-      placeholder="",
+      server="your server address",
+      placeholder="说点什么吧～",
       timeout=10000
     />
   )
@@ -103,7 +103,37 @@ function App() {
 
 #### Vue
 
-努力开发中
+```bash
+npm i @ovojs/vue
+```
+
+```vue
+<template>
+  <OvO :server="server" :placeholder="placeholder" :timeout="timeout" />
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+import OvO from "@ovojs/vue";
+import "@ovojs/vue/dist/style.css";
+
+export default defineComponent({
+  name: 'App',
+  components: {
+    OvO
+  },
+  data() {
+    return {
+      server: "your server address",
+      placeholder: "说点什么吧～",
+      timeout: 10000
+    }
+  }
+})
+</script>
+```
+
+
 
 ### 自定义主题色
 
