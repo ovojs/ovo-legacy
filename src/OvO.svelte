@@ -1,7 +1,6 @@
 <script lang="ts">
   import Editor from "./Editor.svelte";
   import { count } from "./dfs";
-  import Loading from "./Loading.svelte";
   import type { Comments, Comment, User } from "./types";
   import { onDestroy, onMount } from "svelte";
   import HTTP from "./http";
