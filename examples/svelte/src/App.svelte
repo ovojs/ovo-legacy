@@ -2,6 +2,8 @@
   import OvO from "@ovojs/ovo";
   import Switch from "./Switch.svelte";
 
+  let server = "http://ovo-svr.ibox.moe";
+
   let checked = false;
   let theme = "light";
 
@@ -34,7 +36,7 @@
     <Switch bind:checked />
     <span>{checked ? "开灯" : "关灯"}</span>
   </div>
-  <OvO />
+  <OvO {server} />
 </main>
 
 <style>

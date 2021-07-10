@@ -1,11 +1,12 @@
 <script lang="ts">
-  import Comment from "./Comment.svelte";
   import Editor from "./Editor.svelte";
   import { count } from "./dfs";
   import Loading from "./Loading.svelte";
-  import type { Comments, User } from "./types";
+  import type { Comments, Comment, User } from "./types";
   import { onDestroy, onMount } from "svelte";
   import HTTP from "./http";
+  import Sentinal from "./Sentinal.svelte";
+  import List from "./List.svelte";
 
   export let placeholder = "说点什么吧~";
   export let emoji =
@@ -18,20 +19,11 @@
 
   HTTP.init({ server, timeout });
 
-  let p: Promise<Comments>;
-  let page = 0;
-
+  let page = -1;
+  let done = false;
+  let comments: Comment[] = [];
+  let next: Comments;
   let user: User;
-
-  try {
-    p = HTTP.getComments({
-      domain: location.hostname,
-      path: location.pathname,
-      page,
-    });
-  } catch (e) {
-    console.log(e);
-  }
 
   onMount(function () {
     const cache = localStorage.user;
@@ -43,6 +35,27 @@
   onDestroy(function () {
     console.log("OvO was destroyed");
   });
+
+  async function visiable(e: CustomEvent<IntersectionObserverEntry>) {
+    if (done) return;
+
+    page++;
+
+    try {
+      next = await HTTP.getComments({
+        domain: location.hostname,
+        path: location.pathname,
+        page,
+      });
+    } catch (e) {
+      console.log(e);
+      throw new Error(e);
+    }
+
+    done = next.done;
+
+    comments = [...comments, ...next.comments];
+  }
 </script>
 
 <section class="OvO">
@@ -53,17 +66,19 @@
     email={user?.email}
     website={user?.website}
   />
-  {#await p}
-    <Loading />
-  {:then c}
-    <h3>评论 {count(c.comments)}</h3>
-    <Comment comments={c.comments} />
-  {/await}
+
+  {#if comments.length}
+    <h3>评论 {count(comments)}</h3>
+    <List {comments} />
+  {/if}
+
+  <Sentinal on:visiable={visiable} {done} />
 </section>
 
 <style>
   .OvO {
     width: 100%;
+    max-width: 800px;
   }
 
   h3 {

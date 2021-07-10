@@ -1,5 +1,5 @@
 import App from "./App.svelte";
-import "../../../dist/style.css";
+import "@ovojs/ovo/dist/style.css";
 import "./global.css";
 
 const app = new App({

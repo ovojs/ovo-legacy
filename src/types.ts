@@ -25,7 +25,8 @@ export type Comment = {
 }
 
 export type Comments = {
-  comments: Comment[]
+  comments: Comment[],
+  done: boolean
 }
 
 export type User = {

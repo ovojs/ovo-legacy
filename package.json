@@ -1,6 +1,6 @@
 {
   "name": "@ovojs/ovo",
-  "version": "0.0.1-next.12",
+  "version": "0.0.1-next.13",
   "description": "A super tiny web component for comments",
   "main": "dist/ovo.umd.js",
   "module": "dist/ovo.es.js",

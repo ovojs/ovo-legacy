@@ -148,7 +148,6 @@
 <style>
   form {
     width: 100%;
-    max-width: 800px;
     font-size: 14px;
     color: #444;
   }
