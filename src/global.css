@@ -9,7 +9,7 @@
 }
 
 * {
-  transition: background-color var(--ovo-trans-sec);
+  transition: all var(--ovo-trans-sec);
 }
 
 .ovo-btn {

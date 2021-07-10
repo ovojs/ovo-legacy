@@ -37,23 +37,26 @@
   });
 </script>
 
-{#each comments as c, i}
-  <article id="ovo-{c.id}" class:active={hash && hash.slice(5) === c.id}>
-    <div class="info">
-      <span class="ovo-b"><a href={c.user?.website}>{c.user?.name}</a></span>
-      <span class="ovo-s"> #{c.id}</span>
-      <span class="ovo-s"> {since(c.ctime)}</span>
-      <span class="ovo-s ovo-a ovo-ptr" on:click={() => toggle(i + 1)}>
-        {c.children?.length || 0} 条回复</span
-      >
-      <span class="ovo-s ovo-r ovo-ptr" on:click={() => replyTo(c)}>回复</span>
-    </div>
-    <div class="content">{@html c.content}</div>
-    <div class="details" class:open={bm & (1 << (i + 1))}>
-      <svelte:self comments={c.children} />
-    </div>
-  </article>
-{/each}
+ {#if comments} <!-- sometimes comments is not Array-like and I don't know why. -->
+  {#each comments as c, i}
+    <article id="ovo-{c.id}" class:active={hash && hash.slice(5) === c.id}>
+      <div class="info">
+        <span class="ovo-b"><a href={c.user?.website}>{c.user?.name}</a></span>
+        <span class="ovo-s"> #{c.id}</span>
+        <span class="ovo-s"> {since(c.ctime)}</span>
+        <span class="ovo-s ovo-a ovo-ptr" on:click={() => toggle(i + 1)}>
+          {c.children?.length || 0} 条回复</span
+        >
+        <span class="ovo-s ovo-r ovo-ptr" on:click={() => replyTo(c)}>回复</span
+        >
+      </div>
+      <div class="content">{@html c.content}</div>
+      <div class="details" class:open={bm & (1 << (i + 1))}>
+        <svelte:self comments={c.children} />
+      </div>
+    </article>
+  {/each}
+{/if}
 
 <svelte:window on:hashchange={hashchange} />
 

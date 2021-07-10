@@ -2,11 +2,12 @@
   "extends": "@tsconfig/svelte/tsconfig.json",
   "compilerOptions": {
     "resolveJsonModule": true,
-    "rootDir": "src",
     "outDir": "lib",
     "declaration": true,
     "emitDeclarationOnly": true,
     "composite": true,
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }

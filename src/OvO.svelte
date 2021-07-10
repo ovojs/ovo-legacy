@@ -59,17 +59,13 @@
 </script>
 
 <section class="OvO">
-  <Editor
-    {placeholder}
-    {emoji}
-    {...user}
-  />
+  <Editor {placeholder} {emoji} {...user} />
 
-  {#if comments?.length}
+  {#if comments}
     <h3>评论 {count(comments)}</h3>
     <List {comments} />
   {/if}
-
+  
   <Sentinal on:visiable={visiable} {done} />
 </section>
 

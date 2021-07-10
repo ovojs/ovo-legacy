@@ -54,6 +54,12 @@
     }
   }
 
+  function reset() {
+    reply.update(() => null);
+    textarea.placeholder = "说点什么吧~";
+    textarea.value = "";
+  }
+
   let disabled = false;
 
   async function submit() {
@@ -102,10 +108,9 @@
     try {
       if ($reply) {
         await HTTP.postReply(params);
-        return;
+      } else {
+        await HTTP.postComment(params);
       }
-
-      await HTTP.postComment(params);
     } catch (e) {
       alert(e.message);
       return;
@@ -113,7 +118,8 @@
       disabled = false;
     }
 
-    alert("OvO 发布成功!");
+    alert("发布成功! 当前暂时需要手动刷新网页来显示最新的内容哦 φ(￣∇￣o)");
+    reset();
 
     // alert(
     //   "服务端正在开发中哦 ヾ(≧∇≦*)ゝ\n关注 https://github.com/ovojs/ovo 了解开发进度"
