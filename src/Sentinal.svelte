@@ -7,13 +7,14 @@
 
   const dispatch = createEventDispatcher();
 
-  const observer = new IntersectionObserver(function (
-    entries: IntersectionObserverEntry[]
-  ) {
-    if (entries[0].intersectionRatio <= 0) return;
+  const observer = new IntersectionObserver(
+    function (entries: IntersectionObserverEntry[]) {
+      if (entries[0].intersectionRatio <= 0.8) return;
 
-    dispatch("visiable", entries[0]);
-  });
+      dispatch("visiable", entries[0]);
+    },
+    { threshold: [0.8] }
+  );
 
   onMount(function () {
     observer.observe(el);

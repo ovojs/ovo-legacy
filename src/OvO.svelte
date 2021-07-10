@@ -47,8 +47,9 @@
         page,
       });
     } catch (e) {
-      console.log(e);
-      throw new Error(e);
+      page--;
+      done = true;
+      throw e;
     }
 
     done = next.done;
@@ -64,7 +65,7 @@
     {...user}
   />
 
-  {#if comments.length}
+  {#if comments?.length}
     <h3>评论 {count(comments)}</h3>
     <List {comments} />
   {/if}
