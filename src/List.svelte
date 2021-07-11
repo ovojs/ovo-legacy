@@ -1,9 +1,8 @@
 <script lang="ts">
-  import type { Comment, User } from "./types";
-  import { reply, users } from "./store";
+  import type { Comment } from "./types";
+  import { reply } from "./store";
   import { since } from "./time";
-  import { onMount } from "svelte";
-  import dfs from "./dfs";
+  import EventEmitter from "./event";
 
   export let comments: Comment[] = [];
 
@@ -24,25 +23,17 @@
   function toggle(i: number) {
     bm ^= 1 << i;
   }
-
-  onMount(function () {
-    const us = new Map<string, User>();
-    dfs(comments, (c: Comment) => {
-      us.set(c.user?.name, {
-        name: c.user.name,
-        website: c.user.website,
-      });
-    });
-    users.set(us);
-  });
 </script>
 
- {#if comments} <!-- sometimes comments is not Array-like and I don't know why. -->
+{#if comments}
+  <!-- sometimes comments is not Array-like and I don't know why. -->
   {#each comments as c, i}
     <article id="ovo-{c.id}" class:active={hash && hash.slice(5) === c.id}>
       <div class="info">
         <span class="ovo-b"><a href={c.user?.website}>{c.user?.name}</a></span>
-        <span class="ovo-s"> #{c.id}</span>
+        <span class="ovo-s ovo-ptr" title="引用" on:click={() => EventEmitter.emit("ref", c.id)}>
+          #{c.id}</span
+        >
         <span class="ovo-s"> {since(c.ctime)}</span>
         <span class="ovo-s ovo-a ovo-ptr" on:click={() => toggle(i + 1)}>
           {c.children?.length || 0} 条回复</span
@@ -67,6 +58,10 @@
 
   a {
     color: var(--ovo-ft);
+  }
+
+  .content {
+    font-size: .9em;
   }
 
   :global(.details article) {

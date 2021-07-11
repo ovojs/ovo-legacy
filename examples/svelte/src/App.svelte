@@ -1,5 +1,5 @@
 <script lang="ts">
-  import OvO from "../../../src/OvO.svelte";
+  import OvO from "../../../src/OvO.svelte"; // for debuging
   import Switch from "./Switch.svelte";
 
   const server = "https://ovo-svr.ibox.moe";

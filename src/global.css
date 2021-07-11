@@ -8,8 +8,9 @@
   --ovo-trans-sec: .5s;
 }
 
-* {
-  transition: all var(--ovo-trans-sec);
+.OvO * {
+  transition-duration: var(--ovo-trans-sec);
+  transition-property: background-color, border-color;
 }
 
 .ovo-btn {
@@ -96,4 +97,9 @@ input,textarea {
 
 .ovo-bg {
   background: var(--ovo-bg);
+}
+
+.ovo-oa-x {
+  overflow: auto hidden;
+  white-space: nowrap;
 }

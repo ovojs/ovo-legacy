@@ -20,9 +20,15 @@
 
 <Drop title="@">
   <ul class="ovo-ul">
-    {#each us as n}
-      <li class="ovo-li ovo-ptr" on:click={() => select(n.name)}>{n.name} ({n.website})</li>
-    {/each}
+    {#if us.length}
+      {#each us as n}
+        <li class="ovo-li ovo-ptr" on:click={() => select(n.name)}>
+          {n.name} ({n.website})
+        </li>
+      {/each}
+    {:else}
+      没有可以 @ 的人呢
+    {/if}
   </ul>
 </Drop>
 

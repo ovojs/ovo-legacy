@@ -1,5 +1,7 @@
 type Nullable<T> = T | null;
 
+export type ID = string | number;
+
 export type Props = {
   server?: string,
   emoji?: string,
@@ -17,9 +19,9 @@ export type EmojiSource = {
 }
 
 export type Comment = {
-  id: number | string,
-  cid: number | string,     // null if it is a comment, otherwise the ID of a replied comment.
-  rid: number | string,     // null if it is a reply to a comment, otherwise the ID of a replied reply.
+  id: ID,
+  cid: ID,         // null if it is a comment, otherwise the ID of a replied comment.
+  rid: ID,         // null if it is a reply to a comment, otherwise the ID of a replied reply.
   domain: string,
   path: string,    // domain and path work as sid corresponded to the web page.
   content: string,
@@ -50,8 +52,8 @@ export type CommentPostParams = {
 }
 
 export type ReplyTo = {
-  cid: Nullable<number|string>,
-  rid: Nullable<number|string>
+  cid: Nullable<number | string>,
+  rid: Nullable<number | string>
 }
 
 export type ReplyPostParams = CommentPostParams & ReplyTo;

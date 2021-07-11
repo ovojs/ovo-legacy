@@ -4,14 +4,17 @@
   import wordcount from "./wordcount";
   import markdown from "./markdown";
   import { reply } from "./store";
-  import type { Emoji, ReplyPostParams, ReplyTo } from "./types";
+  import type { Emoji, ID, ReplyPostParams, ReplyTo } from "./types";
   import HTTP from "./http";
+  import EventEmitter from "./event";
 
   export let placeholder = "说点什么吧~";
   export let emoji = "";
 
   let textarea: HTMLTextAreaElement;
   let previewing = false;
+  let disabled = false;
+  let refint = "";
   let value = "";
   let html = "";
 
@@ -47,8 +50,14 @@
     insert(user);
   }
 
+  function insertRef(id: ID) {
+    const ref = `#${id} `;
+    insert(ref);
+  }
+
   $: if ($reply) {
     placeholder = `回复#${$reply.id}`;
+    refint = placeholder;
     if (textarea) {
       textarea.focus();
     }
@@ -56,11 +65,14 @@
 
   function reset() {
     reply.update(() => null);
-    textarea.placeholder = "说点什么吧~";
+    textarea.placeholder = "说点什么吧～";
     textarea.value = "";
+    refint = "";
+    previewing = false;
   }
 
-  let disabled = false;
+  EventEmitter.on("refresh", reset);
+  EventEmitter.on("ref", insertRef);
 
   async function submit() {
     if (disabled) return;
@@ -86,7 +98,7 @@
         // A null cid indicates the user is replying to a comment,
         // otherwise to a reply that has `id`.
         // If the user is replying to a comment that is cid being null,
-        // replyTo.cid should be assigned the value of the id of the 
+        // replyTo.cid should be assigned the value of the id of the
         // comment, otherwise the cid the reply belongs to.
         cid: cid || id,
         rid: cid ? id : null,
@@ -119,7 +131,7 @@
     }
 
     alert("发布成功! 当前暂时需要手动刷新网页来显示最新的内容哦 φ(￣∇￣o)");
-    reset();
+    EventEmitter.emit("refresh");
 
     // alert(
     //   "服务端正在开发中哦 ヾ(≧∇≦*)ゝ\n关注 https://github.com/ovojs/ovo 了解开发进度"
@@ -145,6 +157,7 @@
       预览
     </div>
     <UserPicker on:change={insertUser} />
+    <div class="ovo-oa-x">{refint}</div>
     <div />
     <div>{count} 字</div>
     <button class="ovo-btn" type="submit" data-disabled={disabled}>发布</button>
@@ -184,7 +197,7 @@
 
   .action {
     display: grid;
-    grid-template-columns: repeat(3, auto) 1fr repeat(2, auto);
+    grid-template-columns: repeat(4, auto) 1fr repeat(2, auto);
     align-items: center;
     gap: 10px;
     margin-top: 5px;

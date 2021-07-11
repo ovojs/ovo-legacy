@@ -9,7 +9,7 @@ export function count(nodes: Nodable[]): number {
 }
 
 export default function dfs(nodes: Nodable[], cb: (_: Nodable) => void): void {
-  if (!nodes || !nodes.length) return;
+  if (!nodes) return;
   for (let i = 0; i < nodes.length; i++) {
     cb(nodes[i]);
     dfs(nodes[i].children, cb);

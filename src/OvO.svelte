@@ -1,11 +1,13 @@
 <script lang="ts">
   import Editor from "./Editor.svelte";
-  import { count } from "./dfs";
+  import dfs, { count } from "./dfs";
   import type { Comments, Comment, User } from "./types";
   import { onDestroy, onMount } from "svelte";
   import HTTP from "./http";
   import Sentinal from "./Sentinal.svelte";
   import List from "./List.svelte";
+  import EventEmitter from "./event";
+  import { users } from "./store";
 
   export let placeholder = "说点什么吧~";
   export let emoji =
@@ -18,16 +20,21 @@
 
   HTTP.init({ server, timeout });
 
-  let page = -1;
-  let done = false;
-  let comments: Comment[] = [];
+  const us = new Map<string, User>();
+
+  let done: boolean;
+  let page: number;
+  let total: number;
+  let comments: Comment[];
   let next: Comments;
-  let user: User;
+  let me: User;
+
+  reset();
 
   onMount(function () {
     const cache = localStorage.user;
     if (cache) {
-      user = JSON.parse(cache);
+      me = JSON.parse(cache);
     }
   });
 
@@ -35,7 +42,7 @@
     console.log("OvO was destroyed");
   });
 
-  async function visiable(e: CustomEvent<IntersectionObserverEntry>) {
+  async function more(e?: CustomEvent<IntersectionObserverEntry>) {
     if (done) return;
 
     page++;
@@ -55,18 +62,41 @@
     done = next.done;
 
     comments = [...comments, ...next.comments];
+
+    total = 0;
+    us.clear();
+    
+    dfs(comments, function ({ user }: Comment) {
+      total++;
+      if (user) {
+        us.set(user.name, user);
+      }
+    });
+
+    users.set(us);
   }
+
+  function reset() {
+    comments = null; // emits gc?
+    comments = [];
+    page = -1;
+    total = 0;
+    done = false;
+    us.clear();
+  }
+
+  EventEmitter.on("refresh", reset);
 </script>
 
 <section class="OvO">
-  <Editor {placeholder} {emoji} {...user} />
+  <Editor {placeholder} {emoji} {...me} />
 
   {#if comments}
-    <h3>评论 {count(comments)}</h3>
+    <h3>评论 {total}</h3>
     <List {comments} />
   {/if}
-  
-  <Sentinal on:visiable={visiable} {done} />
+
+  <Sentinal on:visiable={more} {done} />
 </section>
 
 <style>
