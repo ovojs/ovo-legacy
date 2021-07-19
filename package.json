@@ -9,11 +9,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "release": "tsc --build && pnpm run build",
-    "site": "cd examples/svelte && pnpm i && pnpm run build",
-    "site:build": "cd examples/svelte && pnpm run build && cd ../../ && ./scripts/site.sh",
-    "pub": "npm publish --access public"
+    "build": "tsc --build && vite build",
+    "release": "npm publish --access public",
+    "build:site": "pnpm run build --filter svelte-example"
   },
   "files": [
     "dist",
