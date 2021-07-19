@@ -130,7 +130,7 @@
       disabled = false;
     }
 
-    alert("发布成功! 当前暂时需要手动刷新网页来显示最新的内容哦 φ(￣∇￣o)");
+    alert("发布成功 φ(￣∇￣o)");
     EventEmitter.emit("refresh");
 
     // alert(
@@ -160,7 +160,9 @@
     <div class="ovo-oa-x">{refint}</div>
     <div />
     <div>{count} 字</div>
-    <button class="ovo-btn" type="submit" data-disabled={disabled}>发布</button>
+    <button class="ovo-btn" type="submit" data-disabled={disabled}>
+      {disabled ? "发布中" : "发布"}
+    </button>
   </div>
 </form>
 
