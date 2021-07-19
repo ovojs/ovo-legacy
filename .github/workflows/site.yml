@@ -18,6 +18,7 @@ jobs:
           node-version: '14.x'
 
       - run: npm i -g pnpm
+      - run: pnpm i
       - run: pnpm run build
       - run: pnpm run build:site
 
