@@ -18,9 +18,9 @@ jobs:
           node-version: '14.x'
           registry-url: 'https://registry.npmjs.org'
 
-        - run: npm i -g pnpm
-        - run: pnpm i
-        - run: pnpm run build --filter "@ovojs/*"
-        - run: pnpm run release
-          env:
-            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: npm i -g pnpm
+      - run: pnpm i
+      - run: pnpm run build --filter "@ovojs/*"
+      - run: pnpm run release
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
