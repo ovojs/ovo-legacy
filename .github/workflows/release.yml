@@ -22,5 +22,5 @@ jobs:
         - run: pnpm i
         - run: pnpm run build --filter "@ovojs/*"
         - run: pnpm run release
-
-      
+          env:
+            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
