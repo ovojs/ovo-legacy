@@ -1,7 +1,7 @@
 {
   "name": "@ovojs/ovo",
-  "version": "0.0.1-next.23",
-  "description": "A super tiny web component for comments",
+  "version": "0.0.1-next.24",
+  "description": "OvO is a svelte web component for comments",
   "main": "dist/ovo.umd.js",
   "module": "dist/ovo.es.js",
   "types": "lib/index.d.ts",
@@ -11,7 +11,7 @@
     "dev": "vite",
     "build": "tsc --build && vite build",
     "build:all": "pnpm run build --filter=\"@ovojs/*\"",
-    "release": "pnpm publish --access public --filter=\"@ovojs/*\"",
+    "release": "npm publish --access public",
     "dev:site": "pnpm run dev --filter svelte-example",
     "build:site": "pnpm run build --filter svelte-example"
   },

@@ -22,6 +22,6 @@ jobs:
       - run: npm i -g pnpm
       - run: pnpm i
       - run: pnpm build:all
-      - run: pnpm release
+      - run: pnpm release --filter=\"@ovojs/*\"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
