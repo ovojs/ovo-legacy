@@ -17,10 +17,12 @@ jobs:
         with:
           node-version: '14.x'
           registry-url: 'https://registry.npmjs.org'
+          scope: '@ovojs'
 
       - run: npm i -g pnpm
       - run: pnpm i
-      - run: pnpm run build --filter "@ovojs/*"
-      - run: pnpm run release
+      - run: pnpm build:all
+      - run: pnpm release
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
