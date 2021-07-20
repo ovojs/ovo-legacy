@@ -1,6 +1,6 @@
 {
   "name": "@ovojs/ovo",
-  "version": "0.0.1-next.20",
+  "version": "0.0.1-next.21",
   "description": "A super tiny web component for comments",
   "main": "dist/ovo.umd.js",
   "module": "dist/ovo.es.js",
@@ -10,7 +10,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --build && vite build",
-    "release": "npm publish --access public",
+    "release": "pnpm publish --access public --filter=\"@ovojs/*\"",
+    "dev:site": "pnpm run dev --filter svelte-example",
     "build:site": "pnpm run build --filter svelte-example"
   },
   "files": [

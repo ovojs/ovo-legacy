@@ -30,7 +30,7 @@
   {#each comments as c, i}
     <article id="ovo-{c.id}" class:active={hash && hash.slice(5) === c.id}>
       <div class="info">
-        <span class="ovo-b"><a href={c.user?.website}>{c.user?.name}</a></span>
+        <span class="ovo-b"><a href={c.user?.website} target="_blank">{c.user?.name}</a></span>
         <span class="ovo-s ovo-ptr" title="引用" on:click={() => EventEmitter.emit("ref", c.id)}>
           #{c.id}</span
         >
