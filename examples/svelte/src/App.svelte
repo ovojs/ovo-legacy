@@ -96,5 +96,6 @@
     color: var(--ft);
     padding: .1em;
     border-radius: 4px;
+    border-color: var(--bdr);
   }
 </style>
