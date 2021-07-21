@@ -97,5 +97,6 @@
     padding: .1em;
     border-radius: 4px;
     border-color: var(--bdr);
+    transition: all .5s;
   }
 </style>
