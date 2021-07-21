@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#262d33">
+  <title>OvO - A Svelte Web Component for Comments</title>
+  <script type="module" crossorigin src="/assets/index.5cefc2a4.js"></script>
+    <link rel="modulepreload" href="/assets/vendor.21be3c66.js">
+    <link rel="stylesheet" href="/assets/index.bfed1fbc.css">
+  </head>
+<script>
+  try {
+    if (!('theme' in localStorage)) {
+      localStorage.theme = window.matchMedia('(prefer-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    document.querySelector('html').classList.add(localStorage.theme);
+  } catch (e) {
+    console.error(e);
+  }
+</script>
+
+<body>
+  <div id="app"></div>
+  
+</body>
+
+</html>
