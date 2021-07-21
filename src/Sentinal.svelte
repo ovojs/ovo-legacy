@@ -1,6 +1,8 @@
 <script lang="ts">
   import { createEventDispatcher, onDestroy, onMount } from "svelte";
+  import type { Locale } from "./types";
 
+  export let locale: Locale;
   export let done = false;
 
   let el: HTMLElement;
@@ -25,7 +27,9 @@
   });
 </script>
 
-<div class="ovo-s" bind:this={el}>{done ? "到底啦 OvO" : "加载中"}</div>
+<div class="ovo-s" bind:this={el}>
+  {done ? `${locale.sentinal.eol}` : `${locale.sentinal.loading}`}
+</div>
 
 <style>
   div {

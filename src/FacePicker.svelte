@@ -2,9 +2,10 @@
   import { createEventDispatcher } from "svelte";
   import Drop from "./Drop.svelte";
   import Loading from "./Loading.svelte";
-  import type { Emoji, EmojiSource } from "./types";
+  import type { Emoji, EmojiSource, Locale } from "./types";
 
   export let emoji = "";
+  export let locale: Locale;
 
   const dispatch = createEventDispatcher();
 
@@ -31,7 +32,7 @@
   const promise = fetchEmojis(emoji);
 </script>
 
-<Drop title="表情">
+<Drop title={locale.editor.faces}>
   <div class="emoji">
     {#await promise}
       <Loading />

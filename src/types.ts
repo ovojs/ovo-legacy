@@ -1,4 +1,8 @@
+import type en from "./locales/en.json";
+
 type Nullable<T> = T | null;
+
+export type Locale = typeof en;
 
 export type ID = string | number;
 

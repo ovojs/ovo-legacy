@@ -1,0 +1,25 @@
+{
+  "locale": "en",
+  "editor": {
+    "name": "Nickname",
+    "email": "Email",
+    "website": "Website",
+    "faces": "Emoji",
+    "preview": "Preview",
+    "submit": "Submit",
+    "waiting": "Waiting",
+    "words": "Words",
+    "placeholder": "Leave your comments",
+    "success": "Success φ(￣∇￣o)"
+  },
+  "comment": {
+    "title": "Total",
+    "comment": "comments",
+    "reply": "reply",
+    "reference": "reference"
+  },
+  "sentinal": {
+    "loading": "Loading comments",
+    "eol": "You've reached the End OvO"
+  }
+}

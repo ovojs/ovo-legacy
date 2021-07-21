@@ -1,0 +1,25 @@
+{
+  "locale": "zh-Hans",
+    "editor": {
+      "name": "昵称",
+      "email": "邮箱",
+      "website": "网址",
+      "faces": "表情",
+      "preview": "预览",
+      "submit": "发布",
+      "waiting": "发布中",
+      "words": "字",
+      "placeholder": "说点什么吧～",
+      "success": "发布成功 φ(￣∇￣o)"
+    },
+    "comment": {
+      "title": "评论",
+      "comment": "条评论",
+      "reply": "回复",
+      "reference": "引用"
+    },
+    "sentinal": {
+      "loading": "加载中",
+      "eol": "到底啦 OvO"
+    }
+  }

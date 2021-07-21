@@ -8,8 +8,10 @@
   import List from "./List.svelte";
   import EventEmitter from "./event";
   import { users } from "./store";
+  import en from "./locales/en.json";
 
-  export let placeholder = "说点什么吧~";
+  export let locale = en;
+  export let placeholder = locale.editor.placeholder;
   export let emoji =
     "https://cdn.jsdelivr.net/gh/DejavuMoe/DejavuMoe/emoji.json";
 
@@ -18,6 +20,7 @@
 
   export let timeout = 10000;
 
+  
   HTTP.init({ server, timeout });
 
   const us = new Map<string, User>();
@@ -65,7 +68,7 @@
 
     total = 0;
     us.clear();
-    
+
     dfs(comments, function ({ user }: Comment) {
       total++;
       if (user) {
@@ -89,14 +92,14 @@
 </script>
 
 <section class="OvO">
-  <Editor {placeholder} {emoji} {...me} />
+  <Editor {placeholder} {emoji} {locale} {...me} />
 
   {#if comments}
-    <h3>评论 {total}</h3>
-    <List {comments} />
+    <h3>{locale.comment.title} {total}</h3>
+    <List {comments} {locale} />
   {/if}
 
-  <Sentinal on:visiable={more} {done} />
+  <Sentinal on:visiable={more} {done} {locale} />
 </section>
 
 <style>

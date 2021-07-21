@@ -4,11 +4,13 @@
   import wordcount from "./wordcount";
   import markdown from "./markdown";
   import { reply } from "./store";
-  import type { Emoji, ID, ReplyPostParams, ReplyTo } from "./types";
+  import type { Emoji, ID, Locale, ReplyPostParams, ReplyTo } from "./types";
   import HTTP from "./http";
   import EventEmitter from "./event";
 
-  export let placeholder = "说点什么吧~";
+  export let locale: Locale;
+  // TODO: bug that placeholder won't update when locale changes.
+  export let placeholder = locale.editor.placeholder;
   export let emoji = "";
 
   let textarea: HTMLTextAreaElement;
@@ -56,7 +58,7 @@
   }
 
   $: if ($reply) {
-    placeholder = `回复#${$reply.id}`;
+    placeholder = `${locale.comment.reply}#${$reply.id}`;
     refint = placeholder;
     if (textarea) {
       textarea.focus();
@@ -65,8 +67,8 @@
 
   function reset() {
     reply.update(() => null);
-    textarea.placeholder = "说点什么吧～";
-    textarea.value = "";
+    placeholder = locale.editor.placeholder;
+    value = "";
     refint = "";
     previewing = false;
   }
@@ -130,7 +132,7 @@
       disabled = false;
     }
 
-    alert("发布成功 φ(￣∇￣o)");
+    alert(locale.editor.success);
     EventEmitter.emit("refresh");
 
     // alert(
@@ -141,27 +143,42 @@
 
 <form on:submit|preventDefault={submit}>
   <div class="info">
-    <input type="text" placeholder="昵称" bind:value={name} required />
-    <input type="email" placeholder="邮箱" bind:value={email} required />
-    <input type="url" placeholder="网址" bind:value={website} required />
+    <input
+      type="text"
+      placeholder={locale.editor.name}
+      bind:value={name}
+      required
+    />
+    <input
+      type="email"
+      placeholder={locale.editor.email}
+      bind:value={email}
+      required
+    />
+    <input
+      type="url"
+      placeholder={locale.editor.website}
+      bind:value={website}
+      required
+    />
   </div>
   <textarea bind:this={textarea} bind:value {placeholder} required />
   <div class="preview" class:open={previewing}>{@html html}</div>
   <div class="action">
-    <FacePicker {emoji} on:change={insertEmoji} />
+    <FacePicker {emoji} {locale} on:change={insertEmoji} />
     <div
       class="ovo-btn"
       data-active={previewing}
       on:click={() => (previewing = !previewing)}
     >
-      预览
+      {locale.editor.preview}
     </div>
     <UserPicker on:change={insertUser} />
     <div class="ovo-oa-x">{refint}</div>
     <div />
-    <div>{count} 字</div>
+    <div>{count} {locale.editor.words}</div>
     <button class="ovo-btn" type="submit" data-disabled={disabled}>
-      {disabled ? "发布中" : "发布"}
+      {disabled ? `${locale.editor.waiting}` : `${locale.editor.submit}`}
     </button>
   </div>
 </form>

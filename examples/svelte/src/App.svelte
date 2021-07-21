@@ -1,11 +1,15 @@
 <script lang="ts">
-  import OvO from "../../../src/OvO.svelte"; // for debuging
+  import OvO from "@ovojs/ovo"; // for debuging
   import Switch from "./Switch.svelte";
+  import langs from "./locales";
 
   const server = "https://ovo-svr.ibox.moe";
 
   let checked = false;
   let theme = "light";
+  let lang: string;
+
+  $: locale = langs[lang];
 
   try {
     theme = localStorage.theme;
@@ -33,10 +37,20 @@
     <a href="https://github.com/ovojs/OvO/blob/main/README.md">README</a>
   </p>
   <div>
-    <Switch bind:checked />
-    <span>{checked ? "开灯" : "关灯"}</span>
+    <div>
+      <span>{checked ? "🌑" : "🌞"}</span>
+      <Switch bind:checked />
+    </div>
+    <div>
+      <span></span>
+      <select bind:value={lang}>
+        {#each Object.keys(langs) as l}
+          <option value={l}>{l}</option>
+        {/each}
+      </select>
+    </div>
   </div>
-  <OvO {server} />
+  <OvO {server} {locale} />
 </main>
 
 <style>
@@ -75,5 +89,12 @@
     align-items: center;
     gap: 0.5em;
     margin: 5px 0;
+  }
+
+  select {
+    background: transparent;
+    color: var(--ft);
+    padding: .1em;
+    border-radius: 4px;
   }
 </style>
