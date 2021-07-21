@@ -10,7 +10,8 @@ export type Props = {
   server?: string,
   emoji?: string,
   placeholder?: string,
-  timeout?: number
+  timeout?: number,
+  locales: Locale
 }
 
 export type Emoji = {

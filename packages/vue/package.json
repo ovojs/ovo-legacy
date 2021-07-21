@@ -1,6 +1,6 @@
 {
   "name": "@ovojs/vue",
-  "version": "0.0.1-next.2",
+  "version": "0.0.1-next.3",
   "main": "dist/ovo.umd.js",
   "module": "dist/ovo.es.js",
   "types": "lib/index.d.ts",
