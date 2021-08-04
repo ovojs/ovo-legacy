@@ -1,6 +1,6 @@
 {
   "name": "@ovojs/ovo",
-  "version": "0.0.1-next.27",
+  "version": "0.0.1-next.28",
   "description": "OvO is a svelte web component for comments",
   "main": "dist/ovo.umd.js",
   "module": "dist/ovo.es.js",
@@ -14,7 +14,8 @@
     "build:all": "pnpm run build --filter=\"@ovojs/*\"",
     "release": "npm publish --access public",
     "dev:site": "pnpm run dev --filter svelte-example",
-    "build:site": "pnpm run build --filter svelte-example"
+    "build:site": "pnpm run build --filter svelte-example",
+    "preview:site": "pnpm run preview --filter svelte-example"
   },
   "files": [
     "dist",

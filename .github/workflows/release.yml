@@ -1,27 +1,29 @@
 name: Release
 
-on:
-  push:
-    branches:
-      - main
+# FIX THIS
 
-jobs:
-  release:
-    runs-on: ubuntu-18.04
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v2
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   release:
+#     runs-on: ubuntu-18.04
+#     steps:
+#       - name: Checkout Repo
+#         uses: actions/checkout@v2
       
-      - name: Setup NodeJS 14.x
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14.x'
-          registry-url: 'https://registry.npmjs.org'
-          scope: '@ovojs'
+#       - name: Setup NodeJS 14.x
+#         uses: actions/setup-node@v2
+#         with:
+#           node-version: '14.x'
+#           registry-url: 'https://registry.npmjs.org'
+#           scope: '@ovojs'
 
-      - run: npm i -g pnpm
-      - run: pnpm i
-      - run: pnpm build:all
-      - run: pnpm release --filter=\"@ovojs/*\"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       - run: npm i -g pnpm
+#       - run: pnpm i
+#       - run: pnpm build:all
+#       - run: pnpm release --filter=\"@ovojs/*\"
+#         env:
+#           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
