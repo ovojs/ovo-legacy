@@ -7,7 +7,7 @@
 
   let checked = false;
   let theme = "light";
-  let lang: string;
+  let lang = "简体中文";
 
   $: locale = langs[lang];
 

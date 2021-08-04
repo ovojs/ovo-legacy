@@ -9,10 +9,10 @@
   },
   "devDependencies": {
     "@ovojs/ovo": "workspace:*",
-    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.11",
+    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.15",
     "@tsconfig/svelte": "^2.0.1",
-    "svelte": "^3.38.2",
+    "svelte": "^3.41.0",
     "svelte-preprocess": "^4.7.4",
-    "vite": "^2.3.7"
+    "vite": "^2.4.4"
   }
 }
