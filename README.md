@@ -149,7 +149,7 @@ OvO 直接使用 [CSS 变量](https://developer.mozilla.org/en-US/docs/Web/CSS/U
 --ovo-trans-sec: .5s;  // 颜色过度时间
 ```
 
-[一个暗黑主题色的示例](https://github.com/ovojs/OvO/blob/main/examples/svelte/src/global.css#L16)
+[一个暗黑主题色的示例](https://github.com/ovojs/OvO/blob/main/examples/svelte-ts/src/global.css#L16)
 
 ## 反馈
 

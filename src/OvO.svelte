@@ -8,9 +8,9 @@
   import List from "./List.svelte";
   import EventEmitter from "./event";
   import { users } from "./store";
-  import en from "./locales/en.json";
+  import zh from "./locales/zh-Hans.json";
 
-  export let locale = en;
+  export let locale = zh;
   export let placeholder = locale.editor.placeholder;
   export let emoji =
     "https://cdn.jsdelivr.net/gh/DejavuMoe/DejavuMoe/emoji.json";
