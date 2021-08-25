@@ -13,7 +13,7 @@
 
   const dispatch = createEventDispatcher();
 
-  function select(name: string) {
+  function select(name: User) {
     dispatch("change", name);
   }
 </script>
@@ -21,13 +21,13 @@
 <Drop title="@">
   <ul class="ovo-ul">
     {#if us.length}
-      {#each us as n}
-        <li class="ovo-li ovo-ptr" on:click={() => select(n.name)}>
-          {n.name} ({n.website})
+      {#each us as u}
+        <li class="ovo-li ovo-ptr" on:click={() => select(u)}>
+          {u.name} ({u.website})
         </li>
       {/each}
     {:else}
-      没有可以 @ 的人呢
+      <div>没有可以 @ 的人呢</div>
     {/if}
   </ul>
 </Drop>
@@ -38,5 +38,9 @@
       max-width: calc(100vw - 10em);
       overflow: auto;
     }
+  }
+
+  div {
+    padding: 1em;
   }
 </style>

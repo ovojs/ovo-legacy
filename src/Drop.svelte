@@ -13,6 +13,7 @@
 <style>
   .drop {
     position: relative;
+    outline: none;
   }
 
   .details {

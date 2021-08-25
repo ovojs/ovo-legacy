@@ -33,6 +33,6 @@ marked.use({
   }
 })
 
-export default function markdown(text: string) {
+export default function tohtml(text: string) {
   return marked(text);
 }

@@ -1,4 +1,4 @@
-// A simple EventEmitter singleton.
+// A simple event emitter singleton.
 
 type Event = (...args: any[]) => void;
 

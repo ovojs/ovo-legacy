@@ -1,5 +1,5 @@
 <script lang="ts">
-  import OvO from "@ovojs/ovo"; // for debuging
+  import OvO from "../../../src/OvO.svelte"; // for debuging
   import Switch from "./Switch.svelte";
   import langs from "./locales";
 
@@ -50,7 +50,7 @@
       </select>
     </div>
   </div>
-  <OvO {server} {locale} />
+  <OvO {locale} />
 </main>
 
 <style>

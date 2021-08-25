@@ -2,9 +2,9 @@
   import FacePicker from "./FacePicker.svelte";
   import UserPicker from "./UserPicker.svelte";
   import wordcount from "./wordcount";
-  import markdown from "./markdown";
+  import tohtml from "./markdown";
   import { reply } from "./store";
-  import type { Emoji, ID, Locale, ReplyPostParams, ReplyTo } from "./types";
+  import type { Emoji, ID, Locale, ReplyPostParams, ReplyTo, User } from "./types";
   import HTTP from "./http";
   import EventEmitter from "./event";
 
@@ -27,7 +27,7 @@
   $: count = wordcount(value);
 
   $: if (previewing) {
-    html = markdown(value);
+    html = tohtml(value);
   }
 
   function insert(text: string) {
@@ -47,9 +47,10 @@
     insert(emoji);
   }
 
-  function insertUser(e: CustomEvent<string>) {
-    const user = `@${e.detail} `;
-    insert(user);
+  function insertUser(e: CustomEvent<User>) {
+    const name = `@${e.detail.name} `;
+    console.log(e.detail);
+    insert(name);
   }
 
   function insertRef(id: ID) {
@@ -81,7 +82,7 @@
 
     disabled = true;
 
-    html = html || markdown(value);
+    html = html || tohtml(value);
 
     // In case that I forget what variables can be used in this scope.
     // console.log("reply:", $reply);
@@ -165,7 +166,6 @@
   <textarea bind:this={textarea} bind:value {placeholder} required />
   <div class="preview" class:open={previewing}>{@html html}</div>
   <div class="action">
-    <FacePicker {emoji} {locale} on:change={insertEmoji} />
     <div
       class="ovo-btn"
       data-active={previewing}
@@ -173,6 +173,7 @@
     >
       {locale.editor.preview}
     </div>
+    <FacePicker {emoji} {locale} on:change={insertEmoji} />
     <UserPicker on:change={insertUser} />
     <div class="ovo-oa-x">{refint}</div>
     <div />
