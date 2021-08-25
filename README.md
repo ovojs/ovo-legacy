@@ -4,6 +4,8 @@ OvO 是一款小巧的 web 端评论插件。感谢 [OωO](https://github.com/DI
 
 [![age](https://wakatime.com/badge/github/ovojs/OvO.svg)](https://wakatime.com/badge/github/ovojs/OvO) [![NPM](https://img.shields.io/npm/v/@ovojs/ovo)](https://npmjs.com/package/@ovojs/ovo) [![gzip size](https://img.badgesize.io/https:/unpkg.com/@ovojs/ovo?compression=gzip)](https:/unpkg.com/@ovojs/ovo)
 
+⚠️ ⚠️ ⚠️ OvO is **NOT SAFE** yet. Waiting for safe backend solutions!
+
 ## 使用
 
 ### 在浏览器中使用
@@ -31,7 +33,7 @@ new OvO({
 })
 ```
 
-其中，`emoji` 和 `server` 分别是表情资源路径和服务端接口，OvO 本身不提供服务端程序，需要由用户自己编写，或使用大佬们开发的 OvO [第三方服务端](https://github.com/ovojs/OvO#第三方服务端)，具体服务端开发规范见[服务端](https://github.com/ovojs/OvO#服务端)。
+其中，`emoji` 和 `server` 分别是表情资源路径和服务端接口，OvO 本身不提供服务端程序，需要由用户自己编写，或使用大佬们开发的 OvO [第三方服务端](https://github.com/ovojs/OvO#第三方服务端)，具体服务端开发规范见 [服务端](https://github.com/ovojs/OvO#服务端)。
 
 另外，OvO 提供一个默认的表情资源和一个用于测试的服务端接口地址，如下：
 
@@ -93,9 +95,9 @@ import "@ovojs/react/dist/style.css";
 function App() {
   return (
     <OvO
-      server="your server address",
-      placeholder="说点什么吧～",
-      timeout=10000
+      server="your server address"
+      placeholder="说点什么吧～"
+      timeout={10000}
     />
   )
 }
@@ -155,7 +157,7 @@ OvO 直接使用 [CSS 变量](https://developer.mozilla.org/en-US/docs/Web/CSS/U
 
 若您对 OvO 有什么改进建议或使用中遇到问题，欢迎在 [Issues](https://github.com/ovojs/OvO/issues) 处发言，或者直接加入 QQ 群 248037506 与大佬们进行互动 🤺。
 
-## 服务端
+## 服务端 (⚠️ Deprecated)
 
 引入服务端的目的是避免将某些数据暴露给浏览器，如第三方数据存储平台的密钥等数据。同时在服务端可以实现限流和禁IP策略，从而防止用户通过接口恶意刷评论。进一步，将 XSS 过滤的代码放在服务端中，可以减小评论插件打包后的体积。另外，在服务端上，用可以自行实现一些个性化功能，如给被@的用户发送消息通知等等。
 
