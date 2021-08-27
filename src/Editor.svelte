@@ -13,6 +13,8 @@
   export let placeholder = locale.editor.placeholder;
   export let emoji = "";
 
+  const WORDS_LIMIT = 400;
+
   let textarea: HTMLTextAreaElement;
   let previewing = false;
   let disabled = false;
@@ -166,6 +168,8 @@
   <textarea bind:this={textarea} bind:value {placeholder} required />
   <div class="preview" class:open={previewing}>{@html html}</div>
   <div class="action">
+    <FacePicker {emoji} {locale} on:change={insertEmoji} />
+    <UserPicker on:change={insertUser} />
     <div
       class="ovo-btn"
       data-active={previewing}
@@ -173,11 +177,10 @@
     >
       {locale.editor.preview}
     </div>
-    <FacePicker {emoji} {locale} on:change={insertEmoji} />
-    <UserPicker on:change={insertUser} />
+    
     <div class="ovo-oa-x">{refint}</div>
     <div />
-    <div>{count} {locale.editor.words}</div>
+    <div>{count}/{WORDS_LIMIT}</div>
     <button class="ovo-btn" type="submit" data-disabled={disabled}>
       {disabled ? `${locale.editor.waiting}` : `${locale.editor.submit}`}
     </button>
