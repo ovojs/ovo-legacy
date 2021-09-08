@@ -23,38 +23,43 @@ export type EmojiSource = {
   temoji: Emoji[]
 }
 
+export type Reply = {
+  id:  ID          // reply id
+  cid: ID          // comment id the reply refers to.
+  rid: ID          // reply id the reply refers to.
+  content: string
+} & Issuer
+
 export type Comment = {
-  id: ID,
-  cid: ID,         // null if it is a comment, otherwise the ID of a replied comment.
-  rid: ID,         // null if it is a reply to a comment, otherwise the ID of a replied reply.
-  domain: string,
-  path: string,    // domain and path work as sid corresponded to the web page.
-  content: string,
-  browser: string, // reserved
-  ctime: string,
-  os: string,      // reserved
-  user: Nullable<User>,
-  children: Comment[],
-  open?: boolean   // reserved
-}
+  id: ID              // comment id
+  domain: string
+  path: string
+  content: string
+  browser: string     // reserved
+  ctime: string
+  os: string          // reserved
+  replies: Comment[]
+  open?: boolean      // reserved
+} & Issuer
+
+export type Repliable<T> = T | Reply
 
 export type Comments = {
   comments: Comment[],
   done: boolean
 }
 
-export type User = {
-  name: string,
-  website: string,
-  email?: string
+export type Issuer = {
+  issuer: string,
+  issuer_website: string,
+  issuer_email: string
 }
 
 export type CommentPostParams = {
   domain: string,
   path: string,
   content: string,
-  user: User
-}
+} & Issuer
 
 export type ReplyTo = {
   cid: Nullable<number | string>,

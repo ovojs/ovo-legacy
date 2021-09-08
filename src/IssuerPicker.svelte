@@ -1,29 +1,29 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
   import Drop from "./Drop.svelte";
-  import { users } from "./store";
-  import type { User } from "./types";
+  import { issuers } from "./store";
+  import type { Issuer } from "./types";
 
-  let us: User[] = [];
+  let isss: Issuer[] = [];
 
-  $: if ($users) {
-    us = [];
-    $users.forEach((user) => us.push(user));
+  $: if ($issuers) {
+    isss = [];
+    $issuers.forEach(iss => isss.push(iss));
   }
 
   const dispatch = createEventDispatcher();
 
-  function select(name: User) {
-    dispatch("change", name);
+  function select(iss: Issuer) {
+    dispatch("change", iss);
   }
 </script>
 
 <Drop title="@">
   <ul class="ovo-ul">
-    {#if us.length}
-      {#each us as u}
-        <li class="ovo-li ovo-ptr" on:click={() => select(u)}>
-          {u.name} ({u.website})
+    {#if isss.length}
+      {#each isss as iss}
+        <li class="ovo-li ovo-ptr" on:click={() => select(iss)}>
+          {iss.issuer} ({iss.issuer_website})
         </li>
       {/each}
     {:else}

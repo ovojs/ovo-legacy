@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Comment, Locale } from "./types";
+  import type { Comment, Locale, Repliable } from "./types";
   import { reply } from "./store";
   import { since } from "./time";
   import EventEmitter from "./event";
@@ -14,7 +14,7 @@
     hash = /#ovo-(\d+|[a-z,0-9]{7})/.test(h) ? h : "";
   }
 
-  function replyTo(c: Comment) {
+  function replyto(c: Repliable<Comment>) {
     reply.set(c);
   }
 
@@ -31,20 +31,22 @@
   {#each comments as c, i}
     <article id="ovo-{c.id}" class:active={hash && hash.slice(5) === c.id}>
       <div class="info">
-        <span class="ovo-b"><a href={c.user?.website} target="_blank">{c.user?.name}</a></span>
+        <span class="ovo-b"><a href={c.issuer_website} target="_blank">{c.issuer}</a></span>
         <span class="ovo-s ovo-ptr" title={locale.comment.reference} on:click={() => EventEmitter.emit("ref", c.id)}>
           #{c.id}</span
         >
         <span class="ovo-s"> {since(c.ctime)}</span>
+        {#if c.replies?.length}
         <span class="ovo-s ovo-a ovo-ptr" on:click={() => toggle(i + 1)}>
-          {c.children?.length || 0} {locale.comment.comment}</span
+          {c.replies?.length} {locale.comment.comment}</span
         >
-        <span class="ovo-s ovo-r ovo-ptr" on:click={() => replyTo(c)}>{locale.comment.reply}</span
+        {/if}
+        <span class="ovo-s ovo-r ovo-ptr" on:click={() => replyto(c)}>{locale.comment.reply}</span
         >
       </div>
       <div class="content">{@html c.content}</div>
       <div class="details" class:open={bm & (1 << (i + 1))}>
-        <svelte:self comments={c.children} {locale} />
+        <svelte:self comments={c.replies} {locale} />
       </div>
     </article>
   {/each}

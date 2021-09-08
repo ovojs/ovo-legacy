@@ -69,7 +69,7 @@
   }
 
   .emoji {
-    width: 400px;
+    width: 380px;
     height: 250px;
     padding: 10px;
     overflow: auto;
@@ -77,7 +77,7 @@
 
   @media (max-width: 600px) {
     .emoji {
-      width: calc(100vw - 3em);
+      width: calc(100vw - 3.2em);
       height: 200px;
     }
   }

@@ -16,7 +16,12 @@ export default class HTTP {
 
   static async postComment(params: CommentPostParams): Promise<void> {
     const body = new Blob([JSON.stringify(params)], {type: 'application/json'});
-    const res = await fetchTimeout(`${this.server}/comment`, { method: "POST", timeout: this.timeout, body });
+    const res = await fetchTimeout(`${this.server}/comment`, { 
+      method: "POST", 
+      timeout: this.timeout, 
+      body,
+      credentials: "include"
+    });
     try {
       if (!res.ok) {
         throw new Error("error posting comment " + params);
@@ -32,7 +37,12 @@ export default class HTTP {
 
   static async postReply(params: ReplyPostParams): Promise<void> {
     const body = new Blob([JSON.stringify(params)], {type: 'application/json'});
-    const res = await fetchTimeout(`${this.server}/reply`, { method: "POST", timeout: this.timeout, body });
+    const res = await fetchTimeout(`${this.server}/reply`, { 
+      method: "POST", 
+      timeout: this.timeout,
+      body,
+      
+    });
     try {
       if (!res.ok) {
         throw new Error("error posting comment " + params);
@@ -50,7 +60,7 @@ export default class HTTP {
     const ps = new URLSearchParams();
     ps.set("domain", encodeURIComponent(params.domain));
     ps.set("path", encodeURIComponent(params.path));
-    ps.set("page", encodeURIComponent(params.page));
+    ps.set("page", String(params.page));
     const res = await fetchTimeout(`${this.server}/comment?${ps.toString()}`, { timeout: this.timeout });
     try {
       if (!res.ok) {
@@ -73,16 +83,22 @@ interface FetchOptions extends RequestInit {
 
 async function fetchTimeout(url: string, opt: FetchOptions) {
   let timer = null;
+  const ctrl = new AbortController()
 
-  timer = setTimeout(() => {
+  timer = setTimeout(function() {
     if (timer) {
       clearTimeout(timer);
       timer = null;
     }
+
+    // ctrl.abort();
     throw new Error("timeout");
   }, opt.timeout);
 
-  const res = await fetch(url, opt);
+  const res = await fetch(url, {
+    signal: ctrl.signal,
+    ...opt
+  });
 
   clearTimeout(timer);
   timer = null;

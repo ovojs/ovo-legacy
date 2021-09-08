@@ -1,12 +1,12 @@
 import marked from "marked";
-import { users } from "./store";
-import type { User } from "./types";
+import { issuers } from "./store";
+import type { Issuer } from "./types";
 
 // @aaA ddd @哈哈 ddd
 
-let map: Map<string, User>;
+let map: Map<string, Issuer>;
 
-users.subscribe(v => map = v);
+issuers.subscribe(v => map = v);
 
 marked.use({
   renderer: {
@@ -17,7 +17,7 @@ marked.use({
       html = html.replace(/@([\u4e00-\u9fa5]|\w)+ /g, tex => {
         matched = true;
         const user = map.get(tex.slice(1).trim());
-        return `<a href="${user?.website || ''}">${tex}</a> `
+        return `<a href="${user?.issuer_website || ''}">${tex}</a> `
       });
 
       html = html.replace(/#(\d+|[a-z,0-9]{7}) /g, tex => {

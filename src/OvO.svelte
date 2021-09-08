@@ -1,13 +1,13 @@
 <script lang="ts">
   import Editor from "./Editor.svelte";
   import dfs from "./dfs";
-  import type { Comments, Comment, User } from "./types";
+  import type { Comments, Comment, Issuer } from "./types";
   import { onDestroy, onMount } from "svelte";
   import HTTP from "./http";
   import Sentinal from "./Sentinal.svelte";
   import List from "./List.svelte";
   import EventEmitter from "./event";
-  import { users } from "./store";
+  import { issuers } from "./store";
   import zh from "./locales/zh-Hans.json";
 
   export let locale = zh;
@@ -20,22 +20,21 @@
 
   export let timeout = 10000;
 
-  
   HTTP.init({ server, timeout });
 
-  const us = new Map<string, User>();
+  const iss = new Map<string, Issuer>();
 
   let done: boolean;
   let page: number;
   let total: number;
   let comments: Comment[];
   let next: Comments;
-  let me: User;
+  let me: Issuer;
 
   reset();
 
   onMount(function () {
-    const cache = localStorage.user;
+    const cache = localStorage.issuer;
     if (cache) {
       me = JSON.parse(cache);
     }
@@ -52,8 +51,8 @@
 
     try {
       next = await HTTP.getComments({
-        domain: location.hostname,
-        path: location.pathname,
+        domain: encodeURIComponent(location.host),
+        path: encodeURIComponent(location.pathname),
         page,
       });
     } catch (e) {
@@ -67,16 +66,16 @@
     comments = [...comments, ...next.comments];
 
     total = 0;
-    us.clear();
+    iss.clear();
 
-    dfs(comments, function ({ user }: Comment) {
+    dfs(comments, function ({ issuer, issuer_website, issuer_email }: Comment) {
       total++;
-      if (user) {
-        us.set(user.name, user);
+      if (issuer) {
+        iss.set(issuer, { issuer, issuer_website, issuer_email });
       }
     });
 
-    users.set(us);
+    issuers.set(iss);
   }
 
   function reset() {
@@ -85,7 +84,7 @@
     page = -1;
     total = 0;
     done = false;
-    us.clear();
+    iss.clear();
   }
 
   EventEmitter.on("refresh", reset);

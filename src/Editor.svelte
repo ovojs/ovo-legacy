@@ -1,10 +1,10 @@
 <script lang="ts">
   import FacePicker from "./FacePicker.svelte";
-  import UserPicker from "./UserPicker.svelte";
+  import IssuerPicker from "./IssuerPicker.svelte";
   import wordcount from "./wordcount";
   import tohtml from "./markdown";
   import { reply } from "./store";
-  import type { Emoji, ID, Locale, ReplyPostParams, ReplyTo, User } from "./types";
+  import type { Emoji, ID, Locale, ReplyPostParams, ReplyTo, Issuer, Reply } from "./types";
   import HTTP from "./http";
   import EventEmitter from "./event";
 
@@ -22,9 +22,9 @@
   let value = "";
   let html = "";
 
-  export let name = "",
-    email = "",
-    website = "";
+  export let issuer = "",
+    issuer_email = "",
+    issuer_website = "";
 
   $: count = wordcount(value);
 
@@ -49,9 +49,8 @@
     insert(emoji);
   }
 
-  function insertUser(e: CustomEvent<User>) {
-    const name = `@${e.detail.name} `;
-    console.log(e.detail);
+  function insertUser(e: CustomEvent<Issuer>) {
+    const name = `@${e.detail.issuer} `;
     insert(name);
   }
 
@@ -94,11 +93,11 @@
     // console.log("website:", website);
     // console.log("server", server);
 
-    let replyTo: ReplyTo;
+    let replyto: ReplyTo;
 
     if ($reply) {
-      const { cid, id } = $reply;
-      replyTo = {
+      const { cid, id } = $reply as Reply;
+      replyto = {
         // *** This is important ***
         // A null cid indicates the user is replying to a comment,
         // otherwise to a reply that has `id`.
@@ -110,17 +109,17 @@
       };
     }
 
-    const user = { name, email, website };
+    const iss = { issuer, issuer_email, issuer_website };
 
     const params: ReplyPostParams = {
-      domain: location.hostname,
-      path: location.pathname,
+      domain: encodeURIComponent(location.host),
+      path: encodeURIComponent(location.pathname),
       content: html,
-      user,
-      ...replyTo,
+      ...iss,
+      ...replyto,
     };
 
-    localStorage.user = JSON.stringify(user);
+    localStorage.issuer = JSON.stringify(iss);
 
     try {
       if ($reply) {
@@ -149,19 +148,19 @@
     <input
       type="text"
       placeholder={locale.editor.name}
-      bind:value={name}
+      bind:value={issuer}
       required
     />
     <input
       type="email"
       placeholder={locale.editor.email}
-      bind:value={email}
+      bind:value={issuer_email}
       required
     />
     <input
       type="url"
       placeholder={locale.editor.website}
-      bind:value={website}
+      bind:value={issuer_website}
       required
     />
   </div>
@@ -169,7 +168,7 @@
   <div class="preview" class:open={previewing}>{@html html}</div>
   <div class="action">
     <FacePicker {emoji} {locale} on:change={insertEmoji} />
-    <UserPicker on:change={insertUser} />
+    <IssuerPicker on:change={insertUser} />
     <div
       class="ovo-btn"
       data-active={previewing}

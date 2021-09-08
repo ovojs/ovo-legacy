@@ -3,7 +3,7 @@
   import Switch from "./Switch.svelte";
   import langs from "./locales";
 
-  const server = "https://ovo-svr.ibox.moe";
+  const server = "http://localhost:5000/api";
 
   let checked = false;
   let theme = "light";
@@ -50,7 +50,7 @@
       </select>
     </div>
   </div>
-  <OvO {locale} />
+  <OvO {locale} {server} />
 </main>
 
 <style>
