@@ -71,6 +71,7 @@
     reply.update(() => null);
     placeholder = locale.editor.placeholder;
     value = "";
+    html = "";
     refint = "";
     previewing = false;
   }
@@ -94,38 +95,38 @@
     // console.log("server", server);
 
     let replyto: ReplyTo;
+    const ps = {} as ReplyPostParams
 
     if ($reply) {
       const { cid, id } = $reply as Reply;
-      replyto = {
         // *** This is important ***
         // A null cid indicates the user is replying to a comment,
         // otherwise to a reply that has `id`.
-        // If the user is replying to a comment that is cid being null,
-        // replyTo.cid should be assigned the value of the id of the
-        // comment, otherwise the cid the reply belongs to.
-        cid: cid || id,
-        rid: cid ? id : null,
-      };
+        // If the user is replying to a reply that indicates a null 
+        // cid, then target cid should be assigned the value of the 
+        // id of the reply, otherwise the cid the reply refers to.
+      ps.cid = cid || id;
+      ps.rid = cid ? id : 0;
+    } else {
+      ps.domain = encodeURIComponent(location.host)
+      ps.path = encodeURIComponent(location.pathname)
     }
 
     const iss = { issuer, issuer_email, issuer_website };
 
-    const params: ReplyPostParams = {
-      domain: encodeURIComponent(location.host),
-      path: encodeURIComponent(location.pathname),
-      content: html,
-      ...iss,
-      ...replyto,
-    };
+    ps.issuer = issuer;
+    ps.issuer_website = issuer_website;
+    ps.issuer_email = issuer_email;
+
+    ps.content = html;
 
     localStorage.issuer = JSON.stringify(iss);
 
     try {
       if ($reply) {
-        await HTTP.postReply(params);
+        await HTTP.postReply(ps);
       } else {
-        await HTTP.postComment(params);
+        await HTTP.postComment(ps);
       }
     } catch (e) {
       alert(e.message);
@@ -179,7 +180,7 @@
     
     <div class="ovo-oa-x">{refint}</div>
     <div />
-    <div>{count}/{WORDS_LIMIT}</div>
+    <div class="ovo-oa-x">{count} / {WORDS_LIMIT}</div>
     <button class="ovo-btn" type="submit" data-disabled={disabled}>
       {disabled ? `${locale.editor.waiting}` : `${locale.editor.submit}`}
     </button>

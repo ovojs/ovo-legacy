@@ -18,7 +18,7 @@
   export let server =
     "https://www.fastmock.site/mock/112f2e694fa5334c4d698ce22a512405/ovo";
 
-  export let timeout = 10000;
+  export let timeout = 8000;
 
   HTTP.init({ server, timeout });
 
@@ -51,8 +51,8 @@
 
     try {
       next = await HTTP.getComments({
-        domain: encodeURIComponent(location.host),
-        path: encodeURIComponent(location.pathname),
+        domain: location.host,
+        path: location.pathname,
         page,
       });
     } catch (e) {

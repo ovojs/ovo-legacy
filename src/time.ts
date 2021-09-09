@@ -4,6 +4,7 @@ const HOUR = 1000 * 60 * 60;
 const DAY = 1000 * 60 * 60 * 24;
 
 export function since(datetime: string, pricise: boolean = false) {
+  datetime = datetime.replace("Z", "8");
   const a = new Date(datetime),
     b = new Date().getTime(),
     d = b - a.getTime();

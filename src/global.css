@@ -21,6 +21,7 @@
   line-height: 1;
   color: var(--ovo-ft);
   background-color: var(--ovo-bg);
+  white-space: nowrap;
   cursor: pointer;
 }
 
@@ -72,6 +73,10 @@ input,textarea {
 }
 
 .ovo-a {
+  text-decoration: none;
+}
+
+.ovo-a:hover {
   text-decoration: underline;
 }
 

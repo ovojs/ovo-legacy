@@ -56,8 +56,8 @@ export type Issuer = {
 }
 
 export type CommentPostParams = {
-  domain: string,
-  path: string,
+  domain?: string,
+  path?: string,
   content: string,
 } & Issuer
 

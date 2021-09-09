@@ -31,18 +31,20 @@
   {#each comments as c, i}
     <article id="ovo-{c.id}" class:active={hash && hash.slice(5) === c.id}>
       <div class="info">
-        <span class="ovo-b"><a href={c.issuer_website} target="_blank">{c.issuer}</a></span>
-        <span class="ovo-s ovo-ptr" title={locale.comment.reference} on:click={() => EventEmitter.emit("ref", c.id)}>
-          #{c.id}</span
-        >
+        <span class="ovo-b"><a class="ovo-a" href={c.issuer_website} target="_blank">{c.issuer}</a></span>
         <span class="ovo-s"> {since(c.ctime)}</span>
-        {#if c.replies?.length}
         <span class="ovo-s ovo-a ovo-ptr" on:click={() => toggle(i + 1)}>
-          {c.replies?.length} {locale.comment.comment}</span
-        >
+        {#if c.replies?.length}
+          {c.replies?.length} {locale.comment.comment}
         {/if}
-        <span class="ovo-s ovo-r ovo-ptr" on:click={() => replyto(c)}>{locale.comment.reply}</span
-        >
+        </span>
+        <span></span>
+        <span class="ovo-s ovo-a ovo-ptr" title={locale.comment.reference} on:click={() => EventEmitter.emit("ref", c.id)}>
+          #{c.id}
+        </span>
+        <span class="ovo-s ovo-a ovo-ptr" on:click={() => replyto(c)}>
+          {locale.comment.reply}
+        </span>
       </div>
       <div class="content">{@html c.content}</div>
       <div class="details" class:open={bm & (1 << (i + 1))}>
@@ -57,6 +59,13 @@
 <style>
   .info {
     padding-top: 1em;
+    display: grid;
+    grid-template-columns: auto auto auto 1fr auto auto;
+    align-items: center;
+  }
+
+  .info span:not(:last-child) {
+    margin-right: .5em;
   }
 
   a {

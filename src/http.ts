@@ -16,11 +16,10 @@ export default class HTTP {
 
   static async postComment(params: CommentPostParams): Promise<void> {
     const body = new Blob([JSON.stringify(params)], {type: 'application/json'});
-    const res = await fetchTimeout(`${this.server}/comment`, { 
-      method: "POST", 
-      timeout: this.timeout, 
+    const res = await fetchTimeout(`${this.server}/comment`, this.timeout, { 
+      method: "POST",
+      credentials: "omit",
       body,
-      credentials: "include"
     });
     try {
       if (!res.ok) {
@@ -37,11 +36,10 @@ export default class HTTP {
 
   static async postReply(params: ReplyPostParams): Promise<void> {
     const body = new Blob([JSON.stringify(params)], {type: 'application/json'});
-    const res = await fetchTimeout(`${this.server}/reply`, { 
+    const res = await fetchTimeout(`${this.server}/reply`, this.timeout, { 
       method: "POST", 
-      timeout: this.timeout,
-      body,
-      
+      credentials: "omit",
+      body, 
     });
     try {
       if (!res.ok) {
@@ -61,7 +59,7 @@ export default class HTTP {
     ps.set("domain", encodeURIComponent(params.domain));
     ps.set("path", encodeURIComponent(params.path));
     ps.set("page", String(params.page));
-    const res = await fetchTimeout(`${this.server}/comment?${ps.toString()}`, { timeout: this.timeout });
+    const res = await fetchTimeout(`${this.server}/comment?${ps.toString()}`, this.timeout);
     try {
       if (!res.ok) {
         throw new Error("error getting comments " + params);
@@ -77,11 +75,7 @@ export default class HTTP {
   }
 }
 
-interface FetchOptions extends RequestInit {
-  timeout: number
-}
-
-async function fetchTimeout(url: string, opt: FetchOptions) {
+async function fetchTimeout(url: string, timeout: number, opt?: RequestInit) {
   let timer = null;
   const ctrl = new AbortController()
 
@@ -93,7 +87,7 @@ async function fetchTimeout(url: string, opt: FetchOptions) {
 
     // ctrl.abort();
     throw new Error("timeout");
-  }, opt.timeout);
+  }, timeout);
 
   const res = await fetch(url, {
     signal: ctrl.signal,

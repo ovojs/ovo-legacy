@@ -3,7 +3,7 @@
   import Switch from "./Switch.svelte";
   import langs from "./locales";
 
-  const server = "http://localhost:5000/api";
+  const server = "https://ovo-vercel.vercel.app/api";
 
   let checked = false;
   let theme = "light";
@@ -30,7 +30,7 @@
 
 <main>
   <h1>OvO</h1>
-  <h2>A Svelte Web Component for Comments</h2>
+  <h2>An anonymous web component for comments</h2>
   <p>
     Inspired by <a href="https://github.com/DIYgod/OwO">OωO</a>. Available on
     <a href="https://github.com/ovojs/OvO">GitHub</a>. Docs in
@@ -65,7 +65,7 @@
     main {
       width: 100vw;
       margin: 0;
-      padding: 0 10px;
+      padding: 0 22px;
     }
   }
 
