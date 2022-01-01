@@ -3,7 +3,7 @@
   import Switch from "./Switch.svelte";
   import langs from "./locales";
 
-  const server = "https://ovo-vercel.vercel.app/api";
+  const server = "https://ovo.nmslwsnd.com";
 
   let checked = false;
   let theme = "light";
