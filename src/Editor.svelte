@@ -106,7 +106,7 @@
         // cid, then target cid should be assigned the value of the 
         // id of the reply, otherwise the cid the reply refers to.
       ps.cid = cid || id;
-      ps.rid = cid ? id : 0;
+      ps.rid = cid ? id : "";
     } else {
       ps.domain = encodeURIComponent(location.host)
       ps.path = encodeURIComponent(location.pathname)
